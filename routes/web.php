@@ -20,3 +20,11 @@ Route::get('actionlogout', [LoginController::class, 'actionlogout'])->name('acti
 
 Route::get('register', [RegisterController::class, 'register'])->name('register');
 Route::post('actionregister', [RegisterController::class, 'actionregister'])->name('actionregister');
+
+Route::get('/', function () {
+    return view('landing');
+});
+
+
+Route::view('/login', 'login')->name('login');
+Route::view('/register', 'register')->name('register');
