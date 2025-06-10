@@ -5,15 +5,9 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 //tanda ->name dibawah untuk mengarahkan route nya nanti di blade templating harus kemana routing url nya
 //middleware sama sekali bukan untuk mengganti route. Middleware semacam filter sebelum masuk ke route tertentu, untuk keamanan akses 
-
-Route::get('/', [LoginController::class, 'login'])->name('login');
-Route::post('actionlogin', [LoginController::class, 'actionlogin'])->name('actionlogin');
 
 Route::get('home', [HomeController::class, 'index'])->name('home')->middleware('auth');
 Route::get('actionlogout', [LoginController::class, 'actionlogout'])->name('actionlogout')->middleware('auth');
@@ -26,5 +20,23 @@ Route::get('/', function () {
 });
 
 
-Route::view('/login', 'login')->name('login');
 Route::view('/register', 'register')->name('register');
+
+
+Route::get('/', function () {
+    return view('landing');
+})->name('beranda');
+
+
+
+//route yang kita pake
+Route::get('/', fn() => view('beranda'))->name('beranda');
+Route::get('/berita', fn() => view('berita'))->name('berita');
+Route::get('/pengumuman', fn() => view('pengumuman'))->name('pengumuman');
+Route::get('/lowongan-pekerjaan', fn() => view('lowongan'))->name('lowongan');
+Route::get('/tentang', fn() => view('tentang'))->name('tentang');
+Route::get('/login', function () {
+    return view('login');
+})->name('login');
+
+Route::post('/login', [LoginController::class, 'login'])->name('actionlogin');
