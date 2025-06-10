@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
-
+use App\Http\Controllers\TentangController;
+use App\Http\Controllers\PublicTentangController;
 
 //tanda ->name dibawah untuk mengarahkan route nya nanti di blade templating harus kemana routing url nya
 //middleware sama sekali bukan untuk mengganti route. Middleware semacam filter sebelum masuk ke route tertentu, untuk keamanan akses 
@@ -50,7 +51,17 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/berita', fn() => view('admin.berita'))->name('admin.berita');
     Route::get('/pengumuman', fn() => view('admin.pengumuman'))->name('admin.pengumuman');
     Route::get('/lowongan', fn() => view('admin.lowongan'))->name('admin.lowongan');
-    Route::get('/tentang', fn() => view('admin.tentang'))->name('admin.tentang');
 });
 
+//tentang
+Route::middleware('auth')->prefix('admin')->group(function () {
+    Route::get('/tentang', [TentangController::class, 'index'])->name('admin.tentang');
+    Route::post('/tentang', [TentangController::class, 'store'])->name('tentang.store');
+    Route::put('/tentang/{tentang}', [TentangController::class, 'update'])->name('tentang.update');
+    Route::delete('/tentang/{tentang}', [TentangController::class, 'destroy'])->name('tentang.destroy');
+});
+
+Route::get('/tentang', [PublicTentangController::class, 'index'])->name('tentang');
+
 Route::get('actionlogout', [LoginController::class, 'actionlogout'])->name('actionlogout')->middleware('auth');
+

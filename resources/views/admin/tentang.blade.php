@@ -1,9 +1,25 @@
 @extends('layouts.master_admin')
-@section('title', 'Tambah Tentang')
+@section('title', 'Kelola Tentang')
 @section('content')
-    <h1>Form Tentang Instansi</h1>
-    <form>
-        <textarea placeholder="Deskripsi tentang organisasi..."></textarea><br><br>
-        <button type="submit">Simpan</button>
+
+@if(session('success'))
+    <div style="color: green">{{ session('success') }}</div>
+@endif
+
+<form method="POST" action="{{ $tentang ? route('tentang.update', $tentang->id) : route('tentang.store') }}">
+    @csrf
+    @if($tentang) @method('PUT') @endif
+
+    <textarea name="isi" rows="10" cols="80" required>{{ old('isi', $tentang->isi ?? '') }}</textarea><br><br>
+    <button type="submit">{{ $tentang ? 'Update' : 'Simpan' }}</button>
+</form>
+
+@if($tentang)
+    <form method="POST" action="{{ route('tentang.destroy', $tentang->id) }}" style="margin-top:20px;">
+        @csrf
+        @method('DELETE')
+        <button type="submit" style="color: red">Hapus</button>
     </form>
+@endif
+
 @endsection
