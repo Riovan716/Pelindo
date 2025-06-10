@@ -29,6 +29,6 @@
     <p>Silakan login atau daftar untuk melanjutkan.</p>
 
     <a href="{{ route('login') }}" class="btn">Login</a>
-    <a href="{{ route('register') }}" class="btn">Register</a>
+   
 </body>
 </html>
