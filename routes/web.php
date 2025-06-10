@@ -9,7 +9,7 @@ use App\Http\Controllers\RegisterController;
 //tanda ->name dibawah untuk mengarahkan route nya nanti di blade templating harus kemana routing url nya
 //middleware sama sekali bukan untuk mengganti route. Middleware semacam filter sebelum masuk ke route tertentu, untuk keamanan akses 
 
-Route::get('home', [HomeController::class, 'index'])->name('home')->middleware('auth');
+
 Route::get('actionlogout', [LoginController::class, 'actionlogout'])->name('actionlogout')->middleware('auth');
 
 Route::get('register', [RegisterController::class, 'register'])->name('register');
@@ -35,8 +35,22 @@ Route::get('/berita', fn() => view('berita'))->name('berita');
 Route::get('/pengumuman', fn() => view('pengumuman'))->name('pengumuman');
 Route::get('/lowongan-pekerjaan', fn() => view('lowongan'))->name('lowongan');
 Route::get('/tentang', fn() => view('tentang'))->name('tentang');
+
 Route::get('/login', function () {
     return view('login');
 })->name('login');
 
-Route::post('/login', [LoginController::class, 'login'])->name('actionlogin');
+Route::post('/login', [LoginController::class, 'actionlogin'])->name('actionlogin');
+
+
+
+// ⬇️ Route untuk dashboard admin setelah login
+Route::middleware('auth')->prefix('admin')->group(function () {
+    Route::get('/dashboard', fn() => view('admin.dashboard'))->name('admin.dashboard');
+    Route::get('/berita', fn() => view('admin.berita'))->name('admin.berita');
+    Route::get('/pengumuman', fn() => view('admin.pengumuman'))->name('admin.pengumuman');
+    Route::get('/lowongan', fn() => view('admin.lowongan'))->name('admin.lowongan');
+    Route::get('/tentang', fn() => view('admin.tentang'))->name('admin.tentang');
+});
+
+Route::get('actionlogout', [LoginController::class, 'actionlogout'])->name('actionlogout')->middleware('auth');

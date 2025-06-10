@@ -41,7 +41,7 @@ class LoginController extends Controller
 
             // $request->session()->regenerate();
             // return redirect()->intended('home');
-            return redirect('home');
+            return redirect()->route('admin.dashboard');
         } else {
             Session::flash('error', 'Email atau Password Salah');
             return redirect('/');
