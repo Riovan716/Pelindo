@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TentangController;
 use App\Http\Controllers\PublicTentangController;
+use App\Http\Controllers\PengumumanController;
 
 //tanda ->name dibawah untuk mengarahkan route nya nanti di blade templating harus kemana routing url nya
 //middleware sama sekali bukan untuk mengganti route. Middleware semacam filter sebelum masuk ke route tertentu, untuk keamanan akses 
@@ -49,7 +50,7 @@ Route::post('/login', [LoginController::class, 'actionlogin'])->name('actionlogi
 Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/dashboard', fn() => view('admin.dashboard'))->name('admin.dashboard');
     Route::get('/berita', fn() => view('admin.berita'))->name('admin.berita');
-    Route::get('/pengumuman', fn() => view('admin.pengumuman'))->name('admin.pengumuman');
+    Route::get('/pengumuman', [PengumumanController::class, 'adminIndex'])->name('admin.pengumuman');
     Route::get('/lowongan', fn() => view('admin.lowongan'))->name('admin.lowongan');
 });
 
@@ -65,3 +66,10 @@ Route::get('/tentang', [PublicTentangController::class, 'index'])->name('tentang
 
 Route::get('actionlogout', [LoginController::class, 'actionlogout'])->name('actionlogout')->middleware('auth');
 
+
+
+Route::post('/pengumuman', [PengumumanController::class, 'store']);
+Route::get('/pengumuman/{id}/edit', [PengumumanController::class, 'edit']);
+Route::put('/pengumuman/{id}', [PengumumanController::class, 'update']);
+Route::delete('/pengumuman/{id}', [PengumumanController::class, 'destroy']);
+Route::get('/pengumuman', [PengumumanController::class, 'index'])->name('pengumuman.destroy');

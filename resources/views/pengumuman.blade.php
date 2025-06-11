@@ -61,6 +61,7 @@
         height: auto;
         border-radius: 10px;
         margin-right: 20px;
+        object-fit: cover;
     }
 
     .pengumuman-konten {
@@ -102,19 +103,30 @@
 </div>
 
 <div class="pengumuman-wrapper">
-    @for ($i = 0; $i < 5; $i++)
+    @forelse ($pengumuman as $item)
         <div class="card-pengumuman">
-            <img src="{{ asset('images/news-image.png') }}" alt="Pengumuman">
+            @php
+                $isImage = $item->file && preg_match('/\.(jpg|jpeg|png|gif|webp)$/i', $item->file);
+                $filePath = $item->file ? asset('storage/' . $item->file) : asset('images/news-image.png');
+            @endphp
+
+            <img src="{{ $isImage ? $filePath : asset('images/news-image.png') }}" alt="Pengumuman">
+
             <div class="pengumuman-konten">
-                <h4>Sosialisasi MBKM BGI 2025</h4>
+                <h4>{{ $item->judul }}</h4>
                 <div class="garis-bawah"></div>
-                <p>
-                    Dear Mahasiswa Sarjana dan Sarjana Terapan Angkatan 2022, BGI kembali membuka kesempatan bagi Mahasiswa/i untuk mengikuti Program MBKM...
-                </p>
-                <span class="selengkapnya">Selengkapnya..</span>
+                <p>{{ Str::limit($item->isi, 150) }}</p>
+
+                @if (!$isImage && $item->file)
+                    <a href="{{ $filePath }}" class="selengkapnya" target="_blank">Lihat Dokumen</a>
+                @else
+                    <span class="selengkapnya">Selengkapnya..</span>
+                @endif
             </div>
         </div>
-    @endfor
+    @empty
+        <p>Tidak ada pengumuman.</p>
+    @endforelse
 </div>
 
 @endsection
