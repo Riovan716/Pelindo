@@ -66,10 +66,15 @@ Route::get('/tentang', [PublicTentangController::class, 'index'])->name('tentang
 
 Route::get('actionlogout', [LoginController::class, 'actionlogout'])->name('actionlogout')->middleware('auth');
 
+//route user pengumuman
+Route::get('/pengumuman', [PengumumanController::class, 'index'])->name('pengumuman');
 
-
+//route admin
 Route::post('/pengumuman', [PengumumanController::class, 'store']);
 Route::get('/pengumuman/{id}/edit', [PengumumanController::class, 'edit']);
 Route::put('/pengumuman/{id}', [PengumumanController::class, 'update']);
 Route::delete('/pengumuman/{id}', [PengumumanController::class, 'destroy']);
-Route::get('/pengumuman', [PengumumanController::class, 'index'])->name('pengumuman.destroy');
+Route::get('/pengumuman/destroy', [PengumumanController::class, 'destroy'])->name('pengumuman.destroy');
+Route::get('/pengumuman/create', [PengumumanController::class, 'adminIndex'])->name('pengumuman.create');
+
+//aa
