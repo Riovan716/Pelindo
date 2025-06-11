@@ -5,6 +5,7 @@
     <form>
         <input type="text" placeholder="Judul"><br><br>
         <textarea placeholder="Isi pengumuman..."></textarea><br><br>
+        <input type="file" placeholder="Judul"><br><br>
         <button type="submit">Simpan</button>
     </form>
 @endsection
