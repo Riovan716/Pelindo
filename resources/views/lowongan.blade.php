@@ -1,7 +1,7 @@
 @extends('layouts.master')
-@section('title', 'Lowongan Pekerjaan')
+@section('title', 'Lowongan Magang')
 @section('content')
-    <h1 style="text-align: center;">Lowongan Pekerjaan Tersedia</h1>
+    <h1 style="text-align: center;">Lowongan Magang Tersedia</h1>
     <ul>
         <li>Staff IT - Full Time</li>
         <li>Admin Pelatihan - Kontrak</li>

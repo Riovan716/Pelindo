@@ -22,23 +22,65 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #003366;
-            padding: 10px 30px;
+            padding: 12px 40px;
+            background: linear-gradient(to bottom, #365486 0%, #7FC7D9 100%);
         }
 
-        .header img {
-            height: 40px;
+        .branding {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
         }
 
-        .header nav a {
+        .branding img {
+            height: 36px;
+        }
+
+        .branding-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .branding-text .ppsdm-text {
+            font-weight: bold;
+            font-size: 20px;
+            font-style: italic;
+        }
+
+        .branding-text .subtitle {
+            font-size: 12px;
+            font-weight: 400;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
             color: white;
             text-decoration: none;
-            margin: 0 12px;
+            font-weight: 500;
+            font-size: 16px;
+            position: relative;
+        }
+
+        nav a:hover,
+        nav a.active {
             font-weight: bold;
         }
 
-        .header nav a:hover {
-            text-decoration: underline;
+        nav a.active::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 100%;
+            height: 2px;
+            background-color: white;
+            border-radius: 2px;
         }
 
         main {
@@ -72,14 +114,22 @@
 
     {{-- Header --}}
     <div class="header">
-        <img src="{{ asset('images/logo.png') }}" alt="PPSDM Logo">
+        <div class="branding">
+            <img src="{{ asset('assets/images/Logo-BUMN.png') }}" alt="Logo BUMN">
+            <img src="{{ asset('assets/images/ppsdm-logo.png') }}" alt="Logo PPSDM">
+            <div class="branding-text">
+                <span class="ppsdm-text">PPSDM</span>
+                <span class="subtitle">Pengelolaan & Pembelajaran<br>Sumber Daya Manusia</span>
+            </div>
+        </div>
+
         <nav>
-            <a href="{{ route('beranda') }}">Beranda</a>
-            <a href="{{ route('berita') }}">Berita</a>
-            <a href="{{ route('pengumuman') }}">Pengumuman</a>
-            <a href="{{ route('lowongan') }}">Lowongan Pekerjaan</a>
-            <a href="{{ route('tentang') }}">Tentang</a>
-            <a href="{{ route('login') }}">Login</a>
+            <a href="{{ route('beranda') }}" class="{{ request()->routeIs('beranda') ? 'active' : '' }}">Beranda</a>
+            <a href="{{ route('berita') }}" class="{{ request()->routeIs('berita') ? 'active' : '' }}">Berita</a>
+            <a href="{{ route('pengumuman') }}" class="{{ request()->routeIs('pengumuman') ? 'active' : '' }}">Pengumuman</a>
+            <a href="{{ route('lowongan') }}" class="{{ request()->routeIs('lowongan') ? 'active' : '' }}">Lowongan Magang</a>
+            <a href="{{ route('tentang') }}" class="{{ request()->routeIs('tentang') ? 'active' : '' }}">Tentang</a>
+            <a href="{{ route('login') }}" class="{{ request()->routeIs('login') ? 'active' : '' }}">Login</a>
         </nav>
     </div>
 
