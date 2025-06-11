@@ -5,12 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'PPSDM')</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f4f7fa;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         .header {
@@ -43,6 +48,7 @@
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            flex-grow: 1;
         }
 
         h1 {
@@ -59,10 +65,12 @@
             padding-left: 20px;
         }
     </style>
+
     @stack('styles')
 </head>
 <body>
 
+    {{-- Header --}}
     <div class="header">
         <img src="{{ asset('images/logo.png') }}" alt="PPSDM Logo">
         <nav>
@@ -75,9 +83,13 @@
         </nav>
     </div>
 
+    {{-- Konten Halaman --}}
     <main>
         @yield('content')
     </main>
+
+    {{-- Footer --}}
+    @include('components.footer')
 
     @stack('scripts')
 </body>

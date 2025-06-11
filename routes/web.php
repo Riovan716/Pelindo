@@ -45,7 +45,7 @@ Route::post('/login', [LoginController::class, 'actionlogin'])->name('actionlogi
 
 
 
-// ⬇️ Route untuk dashboard admin setelah login
+// ⬇ Route untuk dashboard admin setelah login
 Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/dashboard', fn() => view('admin.dashboard'))->name('admin.dashboard');
     Route::get('/berita', fn() => view('admin.berita'))->name('admin.berita');
