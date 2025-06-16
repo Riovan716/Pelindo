@@ -1,21 +1,29 @@
 <?php
+
 namespace App\Http\Controllers;
-// app/Http/Controllers/BeritaController.php
+
 use App\Models\Berita;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class BeritaController extends Controller
 {
+    public function showToPublic()
+    {
+        $beritas = Berita::latest()->get();
+        return view('berita', compact('beritas')); // file berita.blade.php di root
+    }
+
     public function index()
     {
         $beritas = Berita::latest()->get();
-        return view('berita.index', compact('beritas'));
+        return view('admin.berita', compact('beritas'));
     }
 
     public function create()
     {
-        return view('berita.create');
+        // Tidak dipakai karena form tambah ada di halaman index
+        return redirect()->route('admin.berita');
     }
 
     public function store(Request $request)
@@ -32,13 +40,15 @@ class BeritaController extends Controller
         }
 
         Berita::create($validated);
-        return redirect()->route('berita.index')->with('success', 'Berita berhasil ditambahkan.');
+        return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil ditambahkan.');
     }
 
     public function edit(Berita $berita)
     {
-        return view('berita.edit', compact('berita'));
+        $beritas = Berita::latest()->get(); // ← tambah baris ini
+        return view('admin.editberita', compact('berita', 'beritas'));
     }
+
 
     public function update(Request $request, Berita $berita)
     {
@@ -57,7 +67,7 @@ class BeritaController extends Controller
         }
 
         $berita->update($validated);
-        return redirect()->route('berita.index')->with('success', 'Berita berhasil diperbarui.');
+        return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil diperbarui.');
     }
 
     public function destroy(Berita $berita)
@@ -65,7 +75,8 @@ class BeritaController extends Controller
         if ($berita->gambar) {
             Storage::disk('public')->delete($berita->gambar);
         }
+
         $berita->delete();
-        return redirect()->route('berita.index')->with('success', 'Berita berhasil dihapus.');
+        return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil dihapus.');
     }
 }

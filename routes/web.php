@@ -34,7 +34,6 @@ Route::get('/', function () {
 
 //route yang kita pake
 Route::get('/', fn() => view('beranda'))->name('beranda');
-Route::get('/berita', fn() => view('berita'))->name('berita');
 Route::get('/pengumuman', fn() => view('pengumuman'))->name('pengumuman');
 Route::get('/lowongan-pekerjaan', fn() => view('lowongan'))->name('lowongan');
 Route::get('/tentang', fn() => view('tentang'))->name('tentang');
@@ -62,6 +61,23 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::delete('/tentang/{tentang}', [TentangController::class, 'destroy'])->name('tentang.destroy');
 });
 
+//berita user
+Route::get('/berita', [BeritaController::class, 'showToPublic'])->name('berita.public');
+//berita admin
+Route::middleware('auth')->prefix('admin')->group(function () {
+    Route::resource('berita', BeritaController::class)
+        ->names([
+            'index' => 'admin.berita.index',
+            'create' => 'admin.berita.create',
+            'store' => 'admin.berita.store',
+            'edit' => 'admin.berita.edit',
+            'update' => 'admin.berita.update',
+            'destroy' => 'admin.berita.destroy',
+        ])
+        ->parameters(['berita' => 'berita']); // <--- Tambahkan ini
+});
+
+
 Route::get('/tentang', [PublicTentangController::class, 'index'])->name('tentang');
 
 Route::get('actionlogout', [LoginController::class, 'actionlogout'])->name('actionlogout')->middleware('auth');
@@ -79,6 +95,3 @@ Route::get('/pengumuman/create', [PengumumanController::class, 'adminIndex'])->n
 
 //aa
 
-
-
-Route::resource('berita', BeritaController::class);

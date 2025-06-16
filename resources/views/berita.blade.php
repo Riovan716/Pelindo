@@ -2,6 +2,10 @@
 @section('title', 'Berita')
 @section('content')
 
+@php
+    use Illuminate\Support\Str;
+@endphp
+
 <style>
     body {
         background: linear-gradient(to bottom, #82d7e9, #d0f0f8);
@@ -97,16 +101,20 @@
 </div>
 
 <div class="berita-wrapper">
-    @for ($i = 0; $i < 5; $i++)
-    <div class="card-berita">
-        <img src="{{ asset('images/news-image.png') }}" alt="Berita">
-        <div class="berita-konten">
-            <h4>Penguatan SDM Keamanan Siber: Kolaborasi IT Del dan PT Nusantara Siber</h4>
-            <p>Senin 20 Januari 2025, Institut Teknologi Del (IT Del) menerima kunjungan dari PT Nusantara Siber Kreasi dalam rangka menjalin kerja sama strategis...</p>
-            <span class="selengkapnya">Selengkapnya..</span>
-        </div>
-    </div>
-    @endfor
+    @if($beritas->count())
+        @foreach ($beritas as $berita)
+            <div class="card-berita">
+                <img src="{{ asset('storage/' . $berita->gambar) }}" alt="Gambar Berita">
+                <div class="berita-konten">
+                    <h4>{{ $berita->judul }}</h4>
+                    <p>{{ Str::limit(strip_tags($berita->isi), 150) }}</p>
+                    <span class="selengkapnya">Selengkapnya..</span>
+                </div>
+            </div>
+        @endforeach
+    @else
+        <p>Tidak ada berita tersedia.</p>
+    @endif
 </div>
 
 @endsection

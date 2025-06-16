@@ -68,7 +68,7 @@
         <h1>Admin Panel</h1>
         <nav>
             <a href="{{ route('admin.dashboard') }}">Dashboard</a>
-            <a href="{{ route('admin.berita') }}">Tambah Berita</a>
+            <a href="{{ route('admin.berita.index') }}">Berita</a>
             <a href="{{ route('admin.pengumuman') }}">Tambah Pengumuman</a>
             <a href="{{ route('admin.lowongan') }}">Tambah Lowongan</a>
             <a href="{{ route('admin.tentang') }}">Tambah Tentang</a>
