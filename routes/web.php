@@ -7,6 +7,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TentangController;
 use App\Http\Controllers\PublicTentangController;
 use App\Http\Controllers\PengumumanController;
+use App\Http\Controllers\BeritaController;
 
 //tanda ->name dibawah untuk mengarahkan route nya nanti di blade templating harus kemana routing url nya
 //middleware sama sekali bukan untuk mengganti route. Middleware semacam filter sebelum masuk ke route tertentu, untuk keamanan akses 
@@ -49,7 +50,6 @@ Route::post('/login', [LoginController::class, 'actionlogin'])->name('actionlogi
 // ⬇ Route untuk dashboard admin setelah login
 Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/dashboard', fn() => view('admin.dashboard'))->name('admin.dashboard');
-    Route::get('/berita', fn() => view('admin.berita'))->name('admin.berita');
     Route::get('/pengumuman', [PengumumanController::class, 'adminIndex'])->name('admin.pengumuman');
     Route::get('/lowongan', fn() => view('admin.lowongan'))->name('admin.lowongan');
 });
@@ -78,3 +78,7 @@ Route::get('/pengumuman/destroy', [PengumumanController::class, 'destroy'])->nam
 Route::get('/pengumuman/create', [PengumumanController::class, 'adminIndex'])->name('pengumuman.create');
 
 //aa
+
+
+
+Route::resource('berita', BeritaController::class);

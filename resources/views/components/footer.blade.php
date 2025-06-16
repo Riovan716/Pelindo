@@ -30,7 +30,7 @@
 
         {{-- TENGAH: Kemitraan --}}
         <div style="flex: 1; min-width: 280px;">
-            <h3 style="font-size: 16px; font-weight: bold;">Kemitraan</h3>
+            <h3 style="font-size: 16px; font-weight: bold;">KEMITRAAN</h3>
             <p style="font-size: 14px; line-height: 1.6; margin: 0;">
                 Kementerian Badan Usaha Milik Negara<br>
                 Jl. Medan Merdeka Sel. No.13, RT.11/RW.2, Gambir, Kecamatan Gambir, Kota Jakarta Pusat,<br>
@@ -40,7 +40,7 @@
 
         {{-- KANAN: Sosial Media --}}
         <div style="flex: 1; min-width: 180px;">
-            <h3 style="font-size: 16px; font-weight: bold;">Find Us On</h3>
+            <h3 style="font-size: 16px; font-weight: bold;">SOCIAL MEDIA</h3>
             <div style="font-size: 24px; display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
                 <a href="#" style="color: inherit;"><i class='bx bxl-facebook-circle'></i></a>
                 <a href="#" style="color: inherit;"><i class='bx bxl-linkedin-square'></i></a>
