@@ -1,4 +1,4 @@
-<footer style="background: linear-gradient(to bottom, #83d0ec, #4ca2b7); color: #003366; padding: 3rem 2rem;">
+<footer style="background: linear-gradient(to bottom,rgb(255, 255, 255),rgb(104, 187, 208)); color: #003366; padding: 3rem 2rem;">
     <div style="max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2rem;">
 
         {{-- KIRI: Logo dan Contact --}}

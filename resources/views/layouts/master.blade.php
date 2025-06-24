@@ -12,7 +12,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f7fa;
+            background: linear-gradient(to bottom, #7dd2e6, #a5e4f3); 
             display: flex;
             flex-direction: column;
             min-height: 100vh;
@@ -84,13 +84,10 @@
         }
 
         main {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            flex-grow: 1;
+            width: 100%;
+            padding: 40px 60px;
+            background: transparent; 
+            box-shadow: none;
         }
 
         h1 {

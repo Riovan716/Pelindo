@@ -4,55 +4,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login</title>
+    <title>Login - PPSDM</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #b6e0ef, #ffffff);
+            font-family: 'Arial', sans-serif;
+        }
+
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            gap: 50px;
+            padding: 20px;
+            flex-wrap: wrap;
+        }
+
+        .login-box {
+            background-color: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        .tab-switch {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .tab-switch button {
+            padding: 10px 30px;
+            border: none;
+            font-weight: bold;
+            border-radius: 20px;
+        }
+
+        .tab-login {
+            background-color: white;
+            color: black;
+            border: 2px solid #ccc;
+        }
+
+        .tab-register {
+            background-color: transparent;
+            border: 2px dashed #333;
+            color: #333;
+            margin-left: 10px;
+        }
+
+        .form-control {
+            border-radius: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, #8fd1e7, #3e717a);
+            border: none;
+            border-radius: 10px;
+        }
+
+        .text-muted a {
+            text-decoration: underline;
+        }
+
+        .side-info {
+            text-align: center;
+            background-color: #d9f1f8;
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+        }
+
+        .side-info h2 {
+            font-weight: bold;
+            color: #031f4b;
+        }
+
+        .side-info img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 25px;
+            margin-top: 20px;
+            object-fit: cover;
+        }
+    </style>
 </head>
 
-
 <body>
-    <div class="container"><br>
-        <div class="col-md-4 col-md-offset-4">
-            <h2 class="text-center"><b>Login Form</b><br>Application</h3>
-                <hr>
-                @if (session('error'))
-                    <div class="alert alert-danger">
-                        <b>Opps!</b> {{ session('error') }}
-                    </div>
-                @endif
 
-                <form action="{{ route('actionlogin') }}" method="post">
-                    @csrf
+    <div class="login-container">
+        <div class="login-box">
+            <div class="tab-switch">
+                <button class="tab-login">Login</button>
+            </div>
 
-                    <div class="form-group">
-                        <label for="email"><i class="fa fa-envelope"></i> Email</label>
-                        @error('email')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                        <input id="email" type="email" name="email"
-                            class="form-control @error('email') is-invalid @enderror" placeholder="Email"
-                            required="" />
-                    </div>
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    <b>Oops!</b> {{ session('error') }}
+                </div>
+            @endif
 
-                    <div class="form-group">
-                        <label for="password"><i class="fa fa-key"></i> Password</label>
-                        @error('password')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                        <input id = "password" type="password" name="password"
-                            class="form-control @error('password') is-invalid @enderror" placeholder="Password"
-                            required="">
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block">Log In</button>
-                    <hr>
-                    <p class="text-center">Belum punya akun? <a href="register">Register</a> sekarang!</p>
-                </form>
+            <form action="{{ route('actionlogin') }}" method="post">
+                @csrf
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    @error('email')
+                        <div class="invalid-feedback text-danger">{{ $message }}</div>
+                    @enderror
+                    <input id="email" type="email" name="email"
+                        class="form-control @error('email') is-invalid @enderror"
+                        placeholder="Enter Your Username or Email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    @error('password')
+                        <div class="invalid-feedback text-danger">{{ $message }}</div>
+                    @enderror
+                    <input id="password" type="password" name="password"
+                        class="form-control @error('password') is-invalid @enderror"
+                        placeholder="Enter Your Password" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Log In</button>
+                <p class="text-center text-muted mt-2">Do not have an account? <a href="{{ url('register') }}">Register</a></p>
+            </form>
+        </div>
+
+        <div class="side-info">
+            <h2><b>PPSDM</b></h2>
+            <p><strong>Pengelolaan & Pebelajaran<br>Sumber Daya Manusia</strong></p>
+            <img src="{{ asset('assets/images/logo-login.jpg') }}" alt="Logo Login">
         </div>
     </div>
+
 </body>
 
 </html>
