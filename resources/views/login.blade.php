@@ -135,7 +135,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-block">Log In</button>
-                <p class="text-center text-muted mt-2">Do not have an account? <a href="{{ url('register') }}">Register</a></p>
+
             </form>
         </div>
 

@@ -8,6 +8,8 @@ use App\Http\Controllers\TentangController;
 use App\Http\Controllers\PublicTentangController;
 use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\LowonganController;
+use App\Http\Controllers\PendaftarController;
 
 //tanda ->name dibawah untuk mengarahkan route nya nanti di blade templating harus kemana routing url nya
 //middleware sama sekali bukan untuk mengganti route. Middleware semacam filter sebelum masuk ke route tertentu, untuk keamanan akses 
@@ -35,7 +37,7 @@ Route::get('/', function () {
 //route yang kita pake
 Route::get('/', fn() => view('beranda'))->name('beranda');
 Route::get('/pengumuman', fn() => view('pengumuman'))->name('pengumuman');
-Route::get('/lowongan-pekerjaan', fn() => view('lowongan'))->name('lowongan');
+Route::get('/lowongan-pekerjaan', [\App\Http\Controllers\LowonganController::class, 'showToPublic'])->name('lowongan');
 Route::get('/tentang', fn() => view('tentang'))->name('tentang');
 
 Route::get('/login', function () {
@@ -97,3 +99,10 @@ Route::get('/pengumuman/create', [PengumumanController::class, 'adminIndex'])->n
 
 //aa
 
+Route::get('/admin/lowongan', [LowonganController::class, 'create'])->name('admin.lowongan');
+Route::post('/admin/lowongan', [LowonganController::class, 'store'])->name('admin.lowongan.store');
+
+Route::get('/lowongan/{id}/daftar', [PendaftarController::class, 'create'])->name('pendaftar.create');
+Route::post('/lowongan/{id}/daftar', [PendaftarController::class, 'store'])->name('pendaftar.store');
+
+Route::get('/admin/lowongan/{id}/pendaftar', [PendaftarController::class, 'listByLowongan'])->name('admin.lowongan.pendaftar');
