@@ -12,96 +12,129 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to bottom, #7dd2e6, #a5e4f3); 
+            background: linear-gradient(to bottom, #f7fafd, #eaf6fb);
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
 
         .header {
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            padding: 0;
+        }
+        .header-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 40px;
-            background: linear-gradient(to bottom, #365486 0%, #7FC7D9 100%);
+            padding: 18px 48px 10px 48px;
         }
-
         .branding {
             display: flex;
             align-items: center;
-            gap: 12px;
-            color: white;
+            gap: 18px;
         }
-
         .branding img {
-            height: 36px;
+            height: 44px;
         }
-
         .branding-text {
             display: flex;
             flex-direction: column;
             line-height: 1.2;
         }
-
         .branding-text .ppsdm-text {
             font-weight: bold;
-            font-size: 20px;
+            font-size: 22px;
             font-style: italic;
+            color: #0070c9;
+            letter-spacing: 1px;
         }
-
         .branding-text .subtitle {
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 400;
+            color: #0070c9;
         }
-
-        nav {
+        .nav-top-links {
             display: flex;
-            gap: 20px;
+            gap: 24px;
+            align-items: center;
         }
-
-        nav a {
-            color: white;
+        .nav-top-links a {
+            color: #7a7a7a;
+            font-size: 15px;
             text-decoration: none;
             font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-top-links a:hover {
+            color: #0070c9;
+        }
+        .header-separator {
+            border: none;
+            border-top: 2px solid #0070c9;
+            margin: 0 0 0 0;
+            width: 100%;
+        }
+        .header-bottom {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0 48px 0 48px;
+            background: #fff;
+        }
+        nav {
+            display: flex;
+            gap: 32px;
+        }
+        nav a {
+            color: #0070c9;
+            text-decoration: none;
+            font-weight: 600;
             font-size: 16px;
             position: relative;
+            padding: 18px 0 12px 0;
+            transition: color 0.2s;
         }
-
         nav a:hover,
         nav a.active {
-            font-weight: bold;
+            color: #005fa3;
         }
-
         nav a.active::after {
             content: "";
             position: absolute;
             left: 0;
-            bottom: -6px;
+            bottom: 6px;
             width: 100%;
             height: 2px;
-            background-color: white;
+            background-color: #0070c9;
             border-radius: 2px;
         }
-
         main {
             width: 100%;
             padding: 40px 60px;
             background: transparent; 
             box-shadow: none;
         }
-
         h1 {
             text-align: center;
             margin-bottom: 20px;
         }
-
         p, ul {
             font-size: 16px;
             line-height: 1.6;
         }
-
         ul {
             padding-left: 20px;
+        }
+        @media (max-width: 900px) {
+            .header-top, .header-bottom {
+                padding: 12px 10px;
+            }
+            main {
+                padding: 20px 5px;
+            }
         }
     </style>
 
@@ -111,23 +144,24 @@
 
     {{-- Header --}}
     <div class="header">
-        <div class="branding">
-            <img src="{{ asset('assets/images/Logo-BUMN.png') }}" alt="Logo BUMN">
-            <img src="{{ asset('assets/images/ppsdm-logo.png') }}" alt="Logo PPSDM">
-            <div class="branding-text">
-                <span class="ppsdm-text">PPSDM</span>
-                <span class="subtitle">Pengelolaan & Pembelajaran<br>Sumber Daya Manusia</span>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 18px 48px 10px 48px; background: #fff;">
+            <div class="branding">
+                <img src="{{ asset('assets/images/Logo-BUMN.png') }}" alt="Logo BUMN">
+                <img src="{{ asset('assets/images/ppsdm-logo.png') }}" alt="Logo PPSDM">
+                <div class="branding-text">
+                    <span class="ppsdm-text">PPSDM</span>
+                    <span class="subtitle">Pengelolaan & Pembelajaran<br>Sumber Daya Manusia</span>
+                </div>
             </div>
+            <nav>
+                <a href="{{ route('beranda') }}" class="{{ request()->routeIs('beranda') ? 'active' : '' }}">Beranda</a>
+                <a href="{{ route('berita.public') }}" class="{{ request()->routeIs('berita') ? 'active' : '' }}">Berita</a>
+                <a href="{{ route('pengumuman') }}" class="{{ request()->routeIs('pengumuman') ? 'active' : '' }}">Pengumuman</a>
+                <a href="{{ route('lowongan') }}" class="{{ request()->routeIs('lowongan') ? 'active' : '' }}">Lowongan Magang</a>
+                <a href="{{ route('tentang') }}" class="{{ request()->routeIs('tentang') ? 'active' : '' }}">Tentang</a>
+                <a href="{{ route('login') }}" class="{{ request()->routeIs('login') ? 'active' : '' }}">Login</a>
+            </nav>
         </div>
-
-        <nav>
-            <a href="{{ route('beranda') }}" class="{{ request()->routeIs('beranda') ? 'active' : '' }}">Beranda</a>
-            <a href="{{ route('berita.public') }}" class="{{ request()->routeIs('berita') ? 'active' : '' }}">Berita</a>
-            <a href="{{ route('pengumuman') }}" class="{{ request()->routeIs('pengumuman') ? 'active' : '' }}">Pengumuman</a>
-            <a href="{{ route('lowongan') }}" class="{{ request()->routeIs('lowongan') ? 'active' : '' }}">Lowongan Magang</a>
-            <a href="{{ route('tentang') }}" class="{{ request()->routeIs('tentang') ? 'active' : '' }}">Tentang</a>
-            <a href="{{ route('login') }}" class="{{ request()->routeIs('login') ? 'active' : '' }}">Login</a>
-        </nav>
     </div>
 
     {{-- Konten Halaman --}}

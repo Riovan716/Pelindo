@@ -98,8 +98,10 @@
 </style>
 
 <div class="search-container">
-    <input type="text" class="search-box" placeholder="Cari Pengumuman...">
-    <button class="search-btn">🔍</button>
+    <form method="GET" action="{{ route('pengumuman') }}" style="display:inline-block;">
+        <input type="text" name="q" class="search-box" placeholder="Cari Pengumuman..." value="{{ isset($query) ? $query : '' }}">
+        <button class="search-btn" type="submit">🔍</button>
+    </form>
 </div>
 
 <div class="pengumuman-wrapper">
@@ -120,7 +122,7 @@
                 @if (!$isImage && $item->file)
                     <a href="{{ $filePath }}" class="selengkapnya" target="_blank">Lihat Dokumen</a>
                 @else
-                    <span class="selengkapnya">Selengkapnya..</span>
+                    <a href="{{ route('pengumuman.show', $item->id) }}" class="selengkapnya">Selengkapnya..</a>
                 @endif
             </div>
         </div>

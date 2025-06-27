@@ -92,12 +92,21 @@
         font-style: italic;
         text-align: right;
         display: block;
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+    
+    .berita-konten .selengkapnya:hover {
+        color: #0288d1;
+        text-decoration: underline;
     }
 </style>
 
 <div class="search-container">
-    <input type="text" class="search-box" placeholder="Cari Berita...">
-    <button class="search-btn">🔍</button>
+    <form method="GET" action="{{ route('berita.public') }}" style="display:inline-block;">
+        <input type="text" name="q" class="search-box" placeholder="Cari Berita..." value="{{ isset($query) ? $query : '' }}">
+        <button class="search-btn" type="submit">🔍</button>
+    </form>
 </div>
 
 <div class="berita-wrapper">
@@ -108,7 +117,7 @@
                 <div class="berita-konten">
                     <h4>{{ $berita->judul }}</h4>
                     <p>{{ Str::limit(strip_tags($berita->isi), 150) }}</p>
-                    <span class="selengkapnya">Selengkapnya..</span>
+                    <a href="{{ route('berita.show', $berita->id) }}" class="selengkapnya">Selengkapnya..</a>
                 </div>
             </div>
         @endforeach

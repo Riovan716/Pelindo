@@ -9,10 +9,19 @@ use Illuminate\Support\Facades\Storage;
 class PengumumanController extends Controller
 {
 
-  public function index()
+  public function index(Request $request)
   {
-    $pengumuman = Pengumuman::all();
-    return view('pengumuman', compact('pengumuman'));
+    $query = $request->input('q');
+    $pengumuman = Pengumuman::query();
+    if ($query) {
+      $pengumuman = $pengumuman->where(function($qObj) use ($query) {
+        $qObj->where('judul', 'like', "%$query%")
+             ->orWhere('isi', 'like', "%$query%")
+             ;
+      });
+    }
+    $pengumuman = $pengumuman->latest()->get();
+    return view('pengumuman', compact('pengumuman', 'query'));
   }
   // Tampilkan form tambah
   public function adminIndex()
@@ -101,5 +110,12 @@ class PengumumanController extends Controller
     $pengumuman->delete();
 
     return redirect()->back()->with('success', 'Pengumuman berhasil dihapus.');
+  }
+
+  // Tampilkan detail pengumuman
+  public function show($id)
+  {
+    $pengumuman = Pengumuman::findOrFail($id);
+    return view('pengumumandetail', compact('pengumuman'));
   }
 }

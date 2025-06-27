@@ -63,6 +63,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 
 //berita user
 Route::get('/berita', [BeritaController::class, 'showToPublic'])->name('berita.public');
+Route::get('/berita/{id}', [BeritaController::class, 'show'])->name('berita.show');
 //berita admin
 Route::middleware('auth')->prefix('admin')->group(function () {
     Route::resource('berita', BeritaController::class)
@@ -84,6 +85,7 @@ Route::get('actionlogout', [LoginController::class, 'actionlogout'])->name('acti
 
 //route user pengumuman
 Route::get('/pengumuman', [PengumumanController::class, 'index'])->name('pengumuman');
+Route::get('/pengumuman/{id}', [PengumumanController::class, 'show'])->name('pengumuman.show');
 
 //route admin
 Route::post('/pengumuman', [PengumumanController::class, 'store']);

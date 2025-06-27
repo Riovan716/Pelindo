@@ -8,10 +8,19 @@ use Illuminate\Support\Facades\Storage;
 
 class BeritaController extends Controller
 {
-    public function showToPublic()
+    public function showToPublic(Request $request)
     {
-        $beritas = Berita::latest()->get();
-        return view('berita', compact('beritas')); // file berita.blade.php di root
+        $query = $request->input('q');
+        $beritas = Berita::query();
+        if ($query) {
+            $beritas = $beritas->where(function($q) use ($query) {
+                $q->where('judul', 'like', "%$query%")
+                  ->orWhere('isi', 'like', "%$query%")
+                  ;
+            });
+        }
+        $beritas = $beritas->latest()->get();
+        return view('berita', compact('beritas', 'query'));
     }
 
     public function index()
@@ -78,5 +87,16 @@ class BeritaController extends Controller
 
         $berita->delete();
         return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil dihapus.');
+    }
+
+    // Tampilkan detail berita
+    public function show($id)
+    {
+        try {
+            $berita = Berita::findOrFail($id);
+            return view('beritadetail', compact('berita'));
+        } catch (\Exception $e) {
+            return redirect()->route('berita.public')->with('error', 'Berita tidak ditemukan.');
+        }
     }
 }
