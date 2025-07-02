@@ -8,7 +8,7 @@
 <style>
     body {
         font-family: 'Poppins', 'Segoe UI', 'Roboto', Arial, sans-serif;
-        background: linear-gradient(to bottom, #82d7e9, #d0f0f8);
+        background: #f4fbfd;
     }
     .hero-section {
         padding: 80px 40px 60px 40px;
@@ -113,7 +113,7 @@
             </p>
         </div>
         <div class="hero-right">
-            <img src="{{ asset('assets/images/logo-login.jpg') }}" alt="Monumen PT Pelindo">
+            <img src="{{ asset('assets/images/logo-login.jpg') }}" alt="Branch PT Pelindo">
         </div>
     </div>
 </div>

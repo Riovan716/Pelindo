@@ -2,10 +2,11 @@
 @section('title', 'Pengumuman')
 @section('content')
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
 <style>
     body {
-        background: linear-gradient(to bottom, #82d7e9, #d0f0f8);
-        font-family: 'Segoe UI', sans-serif;
+        background: #f4fbfd;
+        font-family: 'Poppins', 'Segoe UI', 'Roboto', Arial, sans-serif;
     }
 
     .search-container {
@@ -42,7 +43,7 @@
 
     .card-pengumuman {
         display: flex;
-        background-color: #72cce3;
+        background-color: #fff;
         border-radius: 20px;
         box-shadow: 4px 4px 10px rgba(0,0,0,0.2);
         width: 90%;
@@ -50,6 +51,7 @@
         padding: 15px;
         align-items: flex-start;
         transition: transform 0.2s ease;
+        font-family: 'Poppins', 'Segoe UI', 'Roboto', Arial, sans-serif;
     }
 
     .card-pengumuman:hover {
@@ -70,23 +72,32 @@
 
     .pengumuman-konten h4 {
         margin: 0;
-        font-weight: bold;
-        color: #111;
-        font-size: 16px;
+        font-weight: 700;
+        color: #0b1957;
+        font-size: 1.2rem;
     }
 
     .pengumuman-konten p {
         margin: 10px 0 0;
-        font-size: 15px;
-        color: #000;
+        font-size: 1.05rem;
+        color: #222;
+        font-family: 'Poppins', 'Segoe UI', 'Roboto', Arial, sans-serif;
     }
 
     .pengumuman-konten .selengkapnya {
-        font-size: 13px;
-        color: #003366;
+        font-size: 1rem;
+        color: #0b1957;
         font-style: italic;
         text-align: right;
         display: block;
+        font-family: 'Poppins', 'Segoe UI', 'Roboto', Arial, sans-serif;
+        font-weight: 600;
+        text-decoration: underline;
+        transition: color 0.2s;
+    }
+
+    .pengumuman-konten .selengkapnya:hover {
+        color: #0288d1;
     }
 
     .garis-bawah {

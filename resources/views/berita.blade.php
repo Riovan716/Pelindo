@@ -6,10 +6,11 @@
     use Illuminate\Support\Str;
 @endphp
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
 <style>
     body {
-        background: linear-gradient(to bottom, #82d7e9, #d0f0f8);
-        font-family: 'Segoe UI', sans-serif;
+        background: #f4fbfd;
+        font-family: 'Poppins', 'Segoe UI', 'Roboto', Arial, sans-serif;
     }
 
     .search-container {
@@ -46,7 +47,7 @@
 
     .card-berita {
         display: flex;
-        background-color: #72cce3;
+        background-color: #fff;
         border-radius: 20px;
         box-shadow: 4px 4px 10px rgba(0,0,0,0.2);
         width: 90%;
@@ -54,6 +55,7 @@
         padding: 15px;
         align-items: flex-start;
         transition: transform 0.2s ease;
+        font-family: 'Poppins', 'Segoe UI', 'Roboto', Arial, sans-serif;
     }
 
     .card-berita:hover {
@@ -72,33 +74,37 @@
     }
 
     .berita-konten h4 {
-        font-style: italic;
-        font-weight: bold;
+        font-style: normal;
+        font-weight: 700;
         margin: 0;
         padding-bottom: 8px;
         border-bottom: 2px solid #000;
+        color: #0b1957;
+        font-size: 1.2rem;
     }
 
     .berita-konten p {
         margin: 10px 0;
-        font-size: 15px;
-        color: #fff;
-        text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        font-size: 1.05rem;
+        color: #222;
+        font-family: 'Poppins', 'Segoe UI', 'Roboto', Arial, sans-serif;
+        text-shadow: none;
     }
 
     .berita-konten .selengkapnya {
-        font-size: 13px;
-        color: #003366;
+        font-size: 1rem;
+        color: #0b1957;
         font-style: italic;
         text-align: right;
         display: block;
-        text-decoration: none;
-        transition: color 0.2s ease;
+        font-family: 'Poppins', 'Segoe UI', 'Roboto', Arial, sans-serif;
+        font-weight: 600;
+        text-decoration: underline;
+        transition: color 0.2s;
     }
     
     .berita-konten .selengkapnya:hover {
         color: #0288d1;
-        text-decoration: underline;
     }
 </style>
 

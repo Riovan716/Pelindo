@@ -12,7 +12,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to bottom, #f7fafd, #eaf6fb);
+            background: transparent;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
@@ -24,6 +24,7 @@
             flex-direction: column;
             box-shadow: 0 2px 8px rgba(0,0,0,0.03);
             padding: 0;
+            border-bottom: 1.5px solid #e0e0e0;
         }
         .header-top {
             display: flex;
@@ -144,9 +145,8 @@
 
     {{-- Header --}}
     <div class="header">
-        <div style="display: flex; justify-content: space-between; align-items: center; padding: 18px 48px 10px 48px; background: #fff;">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 18px 48px 10px 48px; background: transparent;">
             <div class="branding">
-                <img src="{{ asset('assets/images/Logo-BUMN.png') }}" alt="Logo BUMN">
                 <img src="{{ asset('assets/images/ppsdm-logo.png') }}" alt="Logo PPSDM">
                 <div class="branding-text">
                     <span class="ppsdm-text">PPSDM</span>

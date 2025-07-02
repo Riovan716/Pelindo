@@ -4,7 +4,7 @@
 
 <style>
     body {
-        background: linear-gradient(to bottom, #82d7e9, #d0f0f8);
+        background: #f4fbfd;
         font-family: 'Segoe UI', sans-serif;
     }
 

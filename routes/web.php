@@ -38,6 +38,7 @@ Route::get('/', function () {
 Route::get('/', fn() => view('beranda'))->name('beranda');
 Route::get('/pengumuman', fn() => view('pengumuman'))->name('pengumuman');
 Route::get('/lowongan-pekerjaan', [\App\Http\Controllers\LowonganController::class, 'showToPublic'])->name('lowongan');
+Route::get('/lowongan/{id}', [LowonganController::class, 'show'])->name('lowongan.show');
 Route::get('/tentang', fn() => view('tentang'))->name('tentang');
 
 Route::get('/login', function () {

@@ -44,4 +44,15 @@ class LowonganController extends Controller
         $lowongans = \App\Models\Lowongan::latest()->get();
         return view('lowongan', compact('lowongans'));
     }
+
+    // Tampilkan detail lowongan
+    public function show($id)
+    {
+        try {
+            $lowongan = Lowongan::findOrFail($id);
+            return view('lowongandetail', compact('lowongan'));
+        } catch (\Exception $e) {
+            return redirect()->route('lowongan')->with('error', 'Lowongan tidak ditemukan.');
+        }
+    }
 }

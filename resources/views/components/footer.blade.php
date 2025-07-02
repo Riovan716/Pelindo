@@ -1,6 +1,6 @@
-<footer style="width: 100vw; margin: 0; padding: 0; border: none; position: relative; min-height: 320px; background: #fff;">
+<footer style="width: 100vw; margin: 0; padding: 0; border: none; position: relative; min-height: 320px;">
     <!-- Bagian putih atas -->
-    <div style="background: #fff; width: 100vw; height: 120px; position: relative; overflow: hidden;">
+    <div style="width: 100vw; height: 120px; position: relative; overflow: hidden;">
         <img src="{{ asset('assets/images/Footer.png') }}"
              alt="Footer Logo"
              style="
@@ -10,12 +10,12 @@
                 width: 100vw;
                 height: 120px;
                 object-fit: cover;
-                opacity: 0.6;
+                opacity: 1;
                 pointer-events: none;
              ">
     </div>
     <!-- Garis abu tipis -->
-    <div style="background: #f5f5f6; width: 100vw; height: 40px;"></div>
+    <div style="background: #f5f5f6; width: 130vw; height: 5px;"></div>
     <!-- Bagian biru bawah dengan background image Footer.png -->
     <div style="
         background: #0d7bc1 url('{{ asset('assets/images/Footer.png') }}') no-repeat right bottom;

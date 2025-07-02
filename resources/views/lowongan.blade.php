@@ -1,26 +1,135 @@
 @extends('layouts.master')
 @section('title', 'Lowongan Magang')
 @section('content')
-    <h1 style="text-align: center;">Lowongan Magang Tersedia</h1>
-    @if(isset($lowongans) && $lowongans->count())
-        <div style="display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; margin-top: 30px;">
-            @foreach($lowongans as $lowongan)
-                <div style="background: #f9f9f9; border-radius: 12px; box-shadow: 0 2px 8px #0001; width: 320px; padding: 18px; display: flex; flex-direction: column; align-items: center; margin-bottom: 20px;">
-                    @if($lowongan->foto)
-                        <img src="{{ asset('storage/'.$lowongan->foto) }}" alt="Foto Lowongan" style="width: 100%; max-width: 220px; height: 140px; object-fit: cover; border-radius: 8px; margin-bottom: 12px;">
-                    @else
-                        <div style="width: 100%; max-width: 220px; height: 140px; background: #e0e0e0; border-radius: 8px; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; color: #aaa;">Tidak ada foto</div>
-                    @endif
-                    <h3 style="margin: 0 0 8px 0; font-size: 20px; color: #1f1f1f;">{{ $lowongan->judul }}</h3>
-                    <div style="font-size: 14px; color: #444; margin-bottom: 8px; min-height: 40px;">{{ Str::limit($lowongan->deskripsi, 60) }}</div>
-                    <div style="font-size: 13px; color: #666; margin-bottom: 4px;"><b>Kualifikasi:</b> {{ Str::limit($lowongan->kualifikasi, 40) }}</div>
-                    <div style="font-size: 13px; color: #666; margin-bottom: 4px;"><b>Keahlian:</b> {{ Str::limit($lowongan->keahlian, 40) }}</div>
-                    <div style="font-size: 12px; color: #aaa; margin-top: 8px;">Diposting: {{ $lowongan->created_at->format('d M Y') }}</div>
-                    <a href="{{ route('pendaftar.create', $lowongan->id) }}" style="margin-top:10px; color: #fff; background: #588996; padding: 8px 18px; border-radius: 6px; text-decoration: none; display: inline-block;">Daftar</a>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<style>
+    body {
+        font-family: 'Poppins', 'Segoe UI', 'Roboto', Arial, sans-serif;
+        background: #f4fbfd;
+    }
+    .lowongan-title {
+        text-align: center;
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin-top: 32px;
+        margin-bottom: 24px;
+        color: #0b1957;
+        font-family: 'Poppins', 'Segoe UI', 'Roboto', Arial, sans-serif;
+    }
+    .lowongan-list {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        justify-content: center;
+        margin: 0 auto 40px auto;
+        max-width: 1200px;
+        width: 100vw;
+        padding: 0 2vw;
+    }
+    .lowongan-row {
+        display: flex;
+        align-items: flex-start;
+        background: #fff;
+        border-radius: 20px;
+        box-shadow: 0 4px 16px #0002;
+        padding: 24px 32px;
+        width: 100%;
+        max-width: 100%;
+        font-family: 'Poppins', 'Segoe UI', 'Roboto', Arial, sans-serif;
+        min-height: 180px;
+        position: relative;
+    }
+    .lowongan-img {
+        width: 140px;
+        height: 140px;
+        object-fit: cover;
+        border-radius: 16px;
+        background: #e0e0e0;
+        margin-right: 32px;
+        flex-shrink: 0;
+    }
+    .lowongan-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+    }
+    .lowongan-title-row {
+        font-size: 1.35rem;
+        font-weight: 700;
+        margin-bottom: 6px;
+        color: #0b1957;
+        letter-spacing: 0.5px;
+    }
+    .lowongan-divider {
+        border-bottom: 3px solid #222;
+        margin-bottom: 12px;
+        width: 100%;
+    }
+    .lowongan-desc {
+        font-size: 1.05rem;
+        color: #222;
+        margin-bottom: 8px;
+        word-break: break-word;
+    }
+    .lowongan-link {
+        position: absolute;
+        right: 32px;
+        bottom: 18px;
+        font-size: 1rem;
+        color: #0b1957;
+        font-style: italic;
+        text-decoration: underline;
+        font-weight: 600;
+        transition: color 0.2s;
+    }
+    .lowongan-link:hover {
+        color: #0288d1;
+    }
+    @media (max-width: 700px) {
+        .lowongan-list {
+            gap: 18px;
+        }
+        .lowongan-row {
+            flex-direction: column;
+            align-items: stretch;
+            padding: 16px 8px 40px 8px;
+        }
+        .lowongan-img {
+            margin: 0 auto 16px auto;
+            width: 100%;
+            max-width: 220px;
+            height: 120px;
+        }
+        .lowongan-link {
+            position: static;
+            margin-top: 18px;
+            display: block;
+            text-align: right;
+        }
+    }
+</style>
+
+<div class="lowongan-title">Lowongan Magang Tersedia</div>
+@if(isset($lowongans) && $lowongans->count())
+    <div class="lowongan-list">
+        @foreach($lowongans as $lowongan)
+            <div class="lowongan-row">
+                @if($lowongan->foto)
+                    <img src="{{ asset('storage/'.$lowongan->foto) }}" alt="Foto Lowongan" class="lowongan-img">
+                @else
+                    <div class="lowongan-img" style="display:flex;align-items:center;justify-content:center;color:#aaa;">Tidak ada foto</div>
+                @endif
+                <div class="lowongan-content">
+                    <div class="lowongan-title-row">{{ $lowongan->judul }}</div>
+                    <div class="lowongan-divider"></div>
+                    <div class="lowongan-desc">{{ Str::limit($lowongan->deskripsi, 120) }}</div>
                 </div>
-            @endforeach
-        </div>
-    @else
-        <div style="margin-top: 24px; color: #888; text-align:center;">Belum ada lowongan tersedia.</div>
-    @endif
+                <a href="{{ route('lowongan.show', $lowongan->id) }}" class="lowongan-link">Selengkapnya..</a>
+            </div>
+        @endforeach
+    </div>
+@else
+    <div style="margin-top: 24px; color: #888; text-align:center;">Belum ada lowongan tersedia.</div>
+@endif
 @endsection
