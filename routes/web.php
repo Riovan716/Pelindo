@@ -51,7 +51,13 @@ Route::post('/login', [LoginController::class, 'actionlogin'])->name('actionlogi
 
 // ⬇ Route untuk dashboard admin setelah login
 Route::middleware('auth')->prefix('admin')->group(function () {
-    Route::get('/dashboard', fn() => view('admin.dashboard'))->name('admin.dashboard');
+    Route::get('/dashboard', [\App\Http\Controllers\HomeController::class, 'adminDashboard'])->name('admin.dashboard');
+    Route::resource('datasio', \App\Http\Controllers\Admin\DatasioController::class, [
+        'as' => 'admin'
+    ]);
+    Route::resource('diklat', \App\Http\Controllers\Admin\DiklatController::class, [
+        'as' => 'admin'
+    ]);
     Route::get('/pengumuman', [PengumumanController::class, 'adminIndex'])->name('admin.pengumuman');
     Route::get('/lowongan', fn() => view('admin.lowongan'))->name('admin.lowongan');
 });

@@ -10,4 +10,10 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function adminDashboard()
+    {
+        $jumlahPendaftar = \App\Models\Pendaftar::count();
+        return view('admin.dashboard', compact('jumlahPendaftar'));
+    }
 }
