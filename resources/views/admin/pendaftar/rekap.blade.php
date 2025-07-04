@@ -13,7 +13,9 @@
             @forelse($lowongans as $l)
                 <tr>
                     <td>{{ $l->judul }}</td>
-                    <td>{{ $l->pendaftar_count }}</td>
+                    <td>
+                        <a href="{{ route('admin.lowongan.pendaftar', $l->id) }}">{{ $l->pendaftar_count }}</a>
+                    </td>
                 </tr>
             @empty
                 <tr><td colspan="2" style="text-align:center; color:#888;">Belum ada data lowongan.</td></tr>
