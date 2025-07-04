@@ -52,6 +52,7 @@ Route::post('/login', [LoginController::class, 'actionlogin'])->name('actionlogi
 // ⬇ Route untuk dashboard admin setelah login
 Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\HomeController::class, 'adminDashboard'])->name('admin.dashboard');
+    Route::get('/pendaftar/rekap', [\App\Http\Controllers\Admin\PendaftarController::class, 'rekap'])->name('admin.pendaftar.rekap');
     Route::resource('datasio', \App\Http\Controllers\Admin\DatasioController::class, [
         'as' => 'admin'
     ]);
