@@ -16,8 +16,25 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            /* Batik Pelindo background */
+            position: relative;
         }
-
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 0;
+            /* Batik benar-benar mentok ke kanan dan kiri */
+            background:
+                url('{{ asset('assets/images/BatikPelindo.jpeg') }}') left 0 top/auto 100% no-repeat,
+                url('{{ asset('assets/images/BatikPelindo.jpeg') }}') right 0 top/auto 100% no-repeat;
+            opacity: 0.14;
+            pointer-events: none;
+        }
+        .header, main, .footer, .branding, nav, .header-top, .header-bottom {
+            position: relative;
+            z-index: 1;
+        }
         .header {
             background: #fff;
             display: flex;

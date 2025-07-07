@@ -31,8 +31,7 @@ class BeritaController extends Controller
 
     public function create()
     {
-        // Tidak dipakai karena form tambah ada di halaman index
-        return redirect()->route('admin.berita');
+        return view('admin.create_berita');
     }
 
     public function store(Request $request)
@@ -54,10 +53,8 @@ class BeritaController extends Controller
 
     public function edit(Berita $berita)
     {
-        $beritas = Berita::latest()->get(); // ← tambah baris ini
-        return view('admin.editberita', compact('berita', 'beritas'));
+        return view('admin.edit_berita', compact('berita'));
     }
-
 
     public function update(Request $request, Berita $berita)
     {

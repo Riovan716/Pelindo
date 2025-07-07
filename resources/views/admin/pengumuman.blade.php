@@ -1,133 +1,177 @@
 @extends('layouts.master_admin')
 
-@section('title', 'Tambah Pengumuman')
+@section('title', 'Daftar Pengumuman')
 
 @section('content')
 <style>
-    .form-container {
-        max-width: 700px;
-        margin: 30px auto;
-        padding: 30px;
-        background-color: #fff;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    body {
+        background: #f4fbfd;
     }
-
-    .form-group {
-        margin-bottom: 20px;
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
     }
-
-    label {
-        font-weight: bold;
-        display: block;
-        margin-bottom: 6px;
+    .header-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        background: #fff;
+        padding: 24px 32px;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     }
-
-    input[type="text"],
-    textarea,
-    input[type="file"] {
-        width: 100%;
-        padding: 10px;
-        font-size: 14px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
+    .header-section h1 {
+        color: #0070c9;
+        font-size: 28px;
+        font-weight: 700;
+        margin: 0;
     }
-
-    button,
-    .btn {
-        padding: 10px 16px;
-        font-size: 14px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-    .btn-edit {
-        background-color: #ffc107;
-        color: #000;
-    }
-
-    .btn-delete {
-        background-color: #dc3545;
+    .btn-tambah {
+        background: #0070c9;
         color: #fff;
+        padding: 14px 28px;
+        border: none;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0,112,201,0.3);
     }
-
-    .btn:hover {
-        opacity: 0.85;
+    .btn-tambah:hover {
+        background: #005fa3;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0,112,201,0.4);
+        color: #fff;
+        text-decoration: none;
     }
-
-    .table-container {
-        margin: 50px auto;
-        max-width: 900px;
+    .btn-tambah .plus-icon {
+        font-size: 18px;
+        font-weight: 900;
+        margin-right: 6px;
+        display: flex;
+        align-items: center;
     }
-
-    table {
+    .alert {
+        padding: 16px 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        font-weight: 600;
+    }
+    .alert-success {
+        background: #d4edda;
+        color: #155724;
+        border-left: 4px solid #28a745;
+    }
+    .pengumuman-table {
         width: 100%;
         border-collapse: collapse;
-        margin-top: 20px;
+        background: #fff;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     }
-
-    th,
-    td {
-        padding: 12px;
-        border: 1px solid #ccc;
+    .pengumuman-table th {
+        background: #0070c9;
+        color: #fff;
+        font-weight: 700;
+        padding: 16px 20px;
+        border: none;
+        font-size: 15px;
         text-align: left;
     }
-
-    th {
-        background-color: #f2f2f2;
+    .pengumuman-table td {
+        padding: 16px 20px;
+        border-bottom: 1px solid #e0e0e0;
+        font-size: 15px;
+        color: #222;
+        background: #fff;
+        vertical-align: middle;
     }
-
-    img {
-        max-width: 100px;
-        height: auto;
+    .pengumuman-table tr:last-child td {
+        border-bottom: none;
+    }
+    .pengumuman-table tr:hover {
+        background-color: #f8f9fa;
+    }
+    .pengumuman-table img {
+        max-width: 80px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .btn-edit {
+        background: #ffc107;
+        color: #000;
+        margin-right: 8px;
+        padding: 8px 16px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+        transition: all 0.2s;
+    }
+    .btn-edit:hover {
+        background: #ffb300;
+        color: #000;
+        text-decoration: none;
+    }
+    .btn-delete {
+        background: #dc3545;
+        color: #fff;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    .btn-delete:hover {
+        background: #b71c1c;
+    }
+    .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .empty-state p {
+        color: #666;
+        font-size: 16px;
+        margin: 0;
+    }
+    .aksi-group {
+        display: flex;
+        gap: 8px;
+        align-items: center;
     }
 </style>
 
-<div class="form-container">
-    <h2>Form Tambah Pengumuman</h2>
+<div class="container">
+    <div class="header-section">
+        <h1>Daftar Pengumuman</h1>
+        <a href="{{ route('admin.pengumuman.create') }}" class="btn-tambah">
+            <span class="plus-icon">&#43;</span> Tambah Pengumuman
+        </a>
+    </div>
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul style="margin: 0; padding-left: 20px;">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
         </div>
     @endif
-
-    {{-- Form Tambah --}}
-    <form action="{{ url('/pengumuman') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-
-        <div class="form-group">
-            <label for="judul">Judul:</label>
-            <input type="text" name="judul" id="judul" placeholder="Judul" required>
-        </div>
-
-        <div class="form-group">
-            <label for="isi">Isi:</label>
-            <textarea name="isi" id="isi" rows="6" placeholder="Isi pengumuman..." required></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="file">Upload File:</label>
-            <input type="file" name="file" id="file">
-        </div>
-
-        <button type="submit">Simpan</button>
-    </form>
-</div>
-
-<div class="table-container">
-    <h2>Daftar Pengumuman Sebelumnya</h2>
 
     @php use Illuminate\Support\Str; @endphp
 
     @if($pengumuman->count())
-        <table>
+        <table class="pengumuman-table">
             <thead>
                 <tr>
                     <th>Judul</th>
@@ -145,31 +189,36 @@
 
                     <tr>
                         <td>{{ $item->judul }}</td>
-                        <td>{{ Str::limit($item->isi, 100) }}</td>
+                        <td>{{ Str::limit(strip_tags($item->isi), 100) }}</td>
                         <td>
                             @if ($filePath)
                                 @if ($isImage)
                                     <img src="{{ $filePath }}" alt="File">
                                 @else
-                                    <a href="{{ $filePath }}" target="_blank">Lihat Dokumen</a>
+                                    <a href="{{ $filePath }}" target="_blank" class="file-link">Lihat Dokumen</a>
                                 @endif
                             @else
                                 Tidak ada
                             @endif
                         </td>
                         <td>
-                            <form action="{{ url('/pengumuman/' . $item->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-delete" onclick="return confirm('Yakin ingin menghapus pengumuman ini?')">Hapus</button>
-                            </form>
+                            <div class="aksi-group">
+                                <a href="{{ route('admin.pengumuman.edit', $item->id) }}" class="btn-edit">Edit</a>
+                                <form action="{{ route('admin.pengumuman.destroy', $item->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn-delete" onclick="return confirm('Yakin ingin menghapus pengumuman ini?')">Hapus</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     @else
-        <p>Tidak ada pengumuman yang tersedia.</p>
+        <div class="empty-state">
+            <p>Tidak ada pengumuman yang tersedia.</p>
+        </div>
     @endif
 </div>
 @endsection

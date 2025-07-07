@@ -55,6 +55,7 @@ class LoginController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+        $request->session()->flash('logout_success', 'Anda berhasil logout. Sampai jumpa kembali!');
         return redirect('/');
     }
 }

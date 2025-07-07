@@ -6,108 +6,244 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - PPSDM</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
-            background: linear-gradient(to bottom, #b6e0ef, #ffffff);
-            font-family: 'Arial', sans-serif;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f4fbfd 0%, #e8f4f8 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
 
         .login-container {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            gap: 50px;
-            padding: 20px;
-            flex-wrap: wrap;
-        }
-
-        .login-box {
-            background-color: white;
-            padding: 40px;
+            background: #fff;
             border-radius: 20px;
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-            width: 400px;
+            box-shadow: 0 20px 40px rgba(0, 112, 201, 0.1);
+            overflow: hidden;
+            max-width: 900px;
+            width: 100%;
+            min-height: 600px;
         }
 
-        .tab-switch {
+        .login-form-section {
+            flex: 1;
+            padding: 50px 40px;
             display: flex;
+            flex-direction: column;
             justify-content: center;
-            margin-bottom: 30px;
         }
 
-        .tab-switch button {
-            padding: 10px 30px;
-            border: none;
-            font-weight: bold;
-            border-radius: 20px;
+        .login-header {
+            text-align: center;
+            margin-bottom: 40px;
         }
 
-        .tab-login {
-            background-color: white;
-            color: black;
-            border: 2px solid #ccc;
+        .login-header h1 {
+            color: #0070c9;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
         }
 
-        .tab-register {
-            background-color: transparent;
-            border: 2px dashed #333;
+        .login-header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
             color: #333;
-            margin-left: 10px;
+            font-weight: 600;
+            font-size: 14px;
         }
 
         .form-control {
-            border-radius: 10px;
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e1e8ed;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #fff;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #0070c9;
+            box-shadow: 0 0 0 3px rgba(0, 112, 201, 0.1);
+        }
+
+        .form-control.is-invalid {
+            border-color: #dc3545;
+        }
+
+        .invalid-feedback {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 5px;
         }
 
         .btn-primary {
-            background: linear-gradient(to right, #8fd1e7, #3e717a);
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #0070c9 0%, #005fa3 100%);
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
         }
 
-        .text-muted a {
-            text-decoration: underline;
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 112, 201, 0.3);
+        }
+
+        .alert {
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: none;
+        }
+
+        .alert-danger {
+            background: #fff5f5;
+            color: #dc3545;
+            border-left: 4px solid #dc3545;
         }
 
         .side-info {
+            flex: 1;
+            background: linear-gradient(135deg, #0070c9 0%, #005fa3 100%);
+            color: white;
+            padding: 50px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            background-color: #d9f1f8;
-            border-radius: 25px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .side-info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
         }
 
         .side-info h2 {
-            font-weight: bold;
-            color: #031f4b;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .side-info p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
         }
 
         .side-info img {
-            width: 100%;
-            max-width: 300px;
-            border-radius: 25px;
-            margin-top: 20px;
+            width: 350px;
+            height: 350px;
+            border-radius: 20px;
             object-fit: cover;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            z-index: 2;
+        }
+
+        .input-group .form-control {
+            padding-left: 45px;
+        }
+
+        @media (max-width: 768px) {
+            .login-container {
+                flex-direction: column;
+                min-height: auto;
+            }
+
+            .login-form-section,
+            .side-info {
+                padding: 30px 20px;
+            }
+
+            .side-info {
+                order: -1;
+                min-height: 200px;
+            }
+
+            .side-info img {
+                width: 120px;
+                height: 120px;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 
 <body>
-
-    <div class="login-container">
-        <div class="login-box">
-            <div class="tab-switch">
-                <button class="tab-login">Login</button>
+    <div class="login-container fade-in">
+        <div class="login-form-section">
+            <div class="login-header">
+                <h1><i class="fas fa-user-circle"></i> Login</h1>
+                <p>Masuk ke panel administrasi PPSDM</p>
             </div>
 
             @if (session('error'))
                 <div class="alert alert-danger">
-                    <b>Oops!</b> {{ session('error') }}
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <strong>Oops!</strong> {{ session('error') }}
                 </div>
             @endif
 
@@ -115,37 +251,47 @@
                 @csrf
 
                 <div class="form-group">
-                    <label for="email">Email</label>
+                    <label for="email">
+                        <i class="fas fa-envelope"></i> Email
+                    </label>
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input id="email" type="email" name="email"
+                            class="form-control @error('email') is-invalid @enderror"
+                            placeholder="Masukkan email Anda" required>
+                    </div>
                     @error('email')
-                        <div class="invalid-feedback text-danger">{{ $message }}</div>
+                        <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
-                    <input id="email" type="email" name="email"
-                        class="form-control @error('email') is-invalid @enderror"
-                        placeholder="Enter Your Username or Email" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password">
+                        <i class="fas fa-lock"></i> Password
+                    </label>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input id="password" type="password" name="password"
+                            class="form-control @error('password') is-invalid @enderror"
+                            placeholder="Masukkan password Anda" required>
+                    </div>
                     @error('password')
-                        <div class="invalid-feedback text-danger">{{ $message }}</div>
+                        <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
-                    <input id="password" type="password" name="password"
-                        class="form-control @error('password') is-invalid @enderror"
-                        placeholder="Enter Your Password" required>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-block">Log In</button>
-
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt"></i> Masuk
+                </button>
             </form>
         </div>
 
         <div class="side-info">
-            <h2><b>PPSDM</b></h2>
-            <p><strong>Pengelolaan & Pebelajaran<br>Sumber Daya Manusia</strong></p>
-            <img src="{{ asset('assets/images/logo-login.jpg') }}" alt="Logo Login">
+            <h2><i class="fas fa-shield-alt"></i> PPSDM</h2>
+            <p><strong>Pengelolaan & Pembelajaran<br>Sumber Daya Manusia</strong></p>
+            <img src="{{ asset('assets/images/logo-login.jpg') }}" alt="Logo PPSDM">
         </div>
     </div>
-
 </body>
 
 </html>

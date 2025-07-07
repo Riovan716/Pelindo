@@ -30,6 +30,11 @@ class PengumumanController extends Controller
     return view('admin.pengumuman', compact('pengumuman'));
   }
 
+  // Tampilkan form tambah
+  public function create()
+  {
+    return view('admin.create_pengumuman');
+  }
 
   // Simpan pengumuman baru
   public function store(Request $request)
@@ -62,14 +67,14 @@ class PengumumanController extends Controller
     ]);
 
     // Redirect kembali ke form tambah + pesan sukses
-    return redirect()->route('pengumuman.create')->with('success', 'Pengumuman berhasil ditambahkan.');
+    return redirect()->route('admin.pengumuman')->with('success', 'Pengumuman berhasil ditambahkan.');
   }
 
   // Tampilkan form edit
   public function edit($id)
   {
     $pengumuman = Pengumuman::findOrFail($id);
-    return view('pengumuman.edit', compact('pengumuman'));
+    return view('admin.edit_pengumuman', compact('pengumuman'));
   }
 
   // Proses update
@@ -97,7 +102,7 @@ class PengumumanController extends Controller
       'file' => $pengumuman->file,
     ]);
 
-    return redirect()->back()->with('success', 'Pengumuman berhasil diupdate.');
+    return redirect()->route('admin.pengumuman')->with('success', 'Pengumuman berhasil diupdate.');
   }
 
   // Hapus pengumuman
@@ -109,7 +114,7 @@ class PengumumanController extends Controller
     }
     $pengumuman->delete();
 
-    return redirect()->back()->with('success', 'Pengumuman berhasil dihapus.');
+    return redirect()->route('admin.pengumuman')->with('success', 'Pengumuman berhasil dihapus.');
   }
 
   // Tampilkan detail pengumuman
