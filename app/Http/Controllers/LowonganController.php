@@ -55,4 +55,10 @@ class LowonganController extends Controller
             return redirect()->route('lowongan')->with('error', 'Lowongan tidak ditemukan.');
         }
     }
+
+    public function showRekomendasi()
+    {
+        $lowongans = \App\Models\Lowongan::latest()->get();
+        return view('rekomendasi', compact('lowongans'));
+    }
 }

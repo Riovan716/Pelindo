@@ -175,6 +175,7 @@
                 <a href="{{ route('berita.public') }}" class="{{ request()->routeIs('berita') ? 'active' : '' }}">Berita</a>
                 <a href="{{ route('pengumuman') }}" class="{{ request()->routeIs('pengumuman') ? 'active' : '' }}">Pengumuman</a>
                 <a href="{{ route('lowongan') }}" class="{{ request()->routeIs('lowongan') ? 'active' : '' }}">Lowongan Magang</a>
+                <a href="{{ route('rekomendasi') }}" class="{{ request()->routeIs('rekomendasi') ? 'active' : '' }}">Rekomendasi Magang</a>
                 <a href="{{ route('tentang') }}" class="{{ request()->routeIs('tentang') ? 'active' : '' }}">Tentang</a>
                 <a href="{{ route('login') }}" class="{{ request()->routeIs('login') ? 'active' : '' }}">Login</a>
             </nav>

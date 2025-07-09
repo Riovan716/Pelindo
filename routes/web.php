@@ -23,6 +23,9 @@ Route::get('/', fn() => view('beranda'))->name('beranda');
 Route::get('/lowongan-pekerjaan', [\App\Http\Controllers\LowonganController::class, 'showToPublic'])->name('lowongan');
 Route::get('/lowongan/{id}', [LowonganController::class, 'show'])->name('lowongan.show');
 Route::get('/tentang', [PublicTentangController::class, 'index'])->name('tentang');
+Route::get('/rekomendasi-magang', [\App\Http\Controllers\RekomendasiMagangController::class, 'create'])->name('rekomendasi');
+Route::get('/rekomendasi-magang/form', [\App\Http\Controllers\RekomendasiMagangController::class, 'create'])->name('rekomendasi.form');
+Route::post('/rekomendasi-magang', [\App\Http\Controllers\RekomendasiMagangController::class, 'store'])->name('rekomendasi.store');
 
 Route::get('/login', function () {
     return view('login');
@@ -87,3 +90,8 @@ Route::get('/lowongan/{id}/daftar', [PendaftarController::class, 'create'])->nam
 Route::post('/lowongan/{id}/daftar', [PendaftarController::class, 'store'])->name('pendaftar.store');
 
 Route::get('/admin/lowongan/{id}/pendaftar', [PendaftarController::class, 'listByLowongan'])->name('admin.lowongan.pendaftar');
+
+Route::middleware('auth')->prefix('admin')->group(function () {
+    Route::get('/rekomendasi-magang', [\App\Http\Controllers\RekomendasiMagangController::class, 'adminIndex'])->name('admin.rekomendasi');
+    Route::get('/rekomendasi-magang/{id}/mahasiswa', [\App\Http\Controllers\RekomendasiMagangController::class, 'adminMahasiswa'])->name('admin.rekomendasi.mahasiswa');
+});
