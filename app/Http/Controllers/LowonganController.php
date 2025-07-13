@@ -61,4 +61,41 @@ class LowonganController extends Controller
         $lowongans = \App\Models\Lowongan::latest()->get();
         return view('rekomendasi', compact('lowongans'));
     }
+
+    public function edit($id)
+    {
+        $lowongan = \App\Models\Lowongan::findOrFail($id);
+        return view('admin.create_lowongan', compact('lowongan'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $lowongan = \App\Models\Lowongan::findOrFail($id);
+        $request->validate([
+            'judul' => 'required|string|max:255',
+            'deskripsi' => 'required|string',
+            'kualifikasi' => 'nullable|string',
+            'keahlian' => 'nullable|string',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+        ]);
+        $data = $request->only(['judul', 'deskripsi', 'kualifikasi', 'keahlian']);
+        if ($request->hasFile('foto')) {
+            if ($lowongan->foto) {
+                \Storage::disk('public')->delete($lowongan->foto);
+            }
+            $data['foto'] = $request->file('foto')->store('lowongan', 'public');
+        }
+        $lowongan->update($data);
+        return redirect()->route('admin.lowongan')->with('success', 'Lowongan berhasil diupdate!');
+    }
+
+    public function destroy($id)
+    {
+        $lowongan = \App\Models\Lowongan::findOrFail($id);
+        if ($lowongan->foto) {
+            \Storage::disk('public')->delete($lowongan->foto);
+        }
+        $lowongan->delete();
+        return redirect()->route('admin.lowongan')->with('success', 'Lowongan berhasil dihapus!');
+    }
 }

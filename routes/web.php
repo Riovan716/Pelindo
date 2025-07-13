@@ -46,6 +46,9 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/lowongan', [LowonganController::class, 'create'])->name('admin.lowongan');
     Route::get('/lowongan/create', function() { return view('admin.create_lowongan'); })->name('admin.lowongan.create');
     Route::post('/lowongan', [LowonganController::class, 'store'])->name('admin.lowongan.store');
+    Route::get('/lowongan/{id}/edit', [LowonganController::class, 'edit'])->name('admin.lowongan.edit');
+    Route::put('/lowongan/{id}', [LowonganController::class, 'update'])->name('admin.lowongan.update');
+    Route::delete('/lowongan/{id}', [LowonganController::class, 'destroy'])->name('admin.lowongan.destroy');
     
     // Pengumuman admin routes
     Route::get('/pengumuman', [PengumumanController::class, 'adminIndex'])->name('admin.pengumuman');

@@ -207,7 +207,7 @@
                                 <form action="{{ route('admin.pengumuman.destroy', $item->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn-delete" onclick="return confirm('Yakin ingin menghapus pengumuman ini?')">Hapus</button>
+                                    <button type="button" class="btn-delete">Hapus</button>
                                 </form>
                             </div>
                         </td>
@@ -220,5 +220,39 @@
             <p>Tidak ada pengumuman yang tersedia.</p>
         </div>
     @endif
+    <div id="deleteModal" style="display:none;position:fixed;z-index:9999;left:0;top:0;width:100vw;height:100vh;background:rgba(0,0,0,0.18);justify-content:center;align-items:center;">
+        <div class="custom-logout-modal">
+            <div class="custom-logout-title" id="deleteModalTitle">Apakah Anda yakin ingin menghapus pengumuman ini?</div>
+            <div class="custom-logout-btns">
+                <button id="cancelDeleteBtn" class="custom-logout-btn cancel">Cancel</button>
+                <button id="confirmDeleteBtn" class="custom-logout-btn yes">Ya</button>
+            </div>
+        </div>
+    </div>
+    <script>
+    let deleteForm = null;
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.btn-delete').forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                deleteForm = btn.closest('form');
+                document.getElementById('deleteModal').style.display = 'flex';
+            });
+        });
+        document.getElementById('cancelDeleteBtn').onclick = function() {
+            document.getElementById('deleteModal').style.display = 'none';
+            deleteForm = null;
+        };
+        document.getElementById('confirmDeleteBtn').onclick = function() {
+            if(deleteForm) deleteForm.submit();
+        };
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.getElementById('deleteModal').style.display = 'none';
+                deleteForm = null;
+            }
+        });
+    });
+    </script>
 </div>
 @endsection

@@ -83,26 +83,17 @@
     }
 
     .tentang-content {
-        font-size: 1.1rem;
+        font-size: 16px;
         color: #333;
-        line-height: 1.8;
-        text-align: justify;
-        background: #f8fafc;
-        padding: 40px;
-        border-radius: 16px;
-        border-left: 5px solid #0070c9;
+        line-height: 1.7;
+        background: #fff;
+        padding: 32px 32px 32px 32px;
+        border-radius: 12px;
+        border-left: 4px solid #0070c9;
+        margin-bottom: 24px;
+        box-shadow: 0 2px 8px rgba(0,112,201,0.06);
         position: relative;
-    }
-
-    .tentang-content::before {
-        content: '"';
-        position: absolute;
-        top: -10px;
-        left: 20px;
-        font-size: 4rem;
-        color: #0070c9;
-        opacity: 0.2;
-        font-family: serif;
+        text-align: left;
     }
 
     .tentang-content p {
@@ -209,9 +200,7 @@
     </div>
     
     <div class="tentang-content">
-        <p>
-            {!! $tentang->isi ?? 'Data tentang belum tersedia.' !!}
-        </p>
+        {!! nl2br(e($tentang->isi ?? 'Data tentang belum tersedia.')) !!}
     </div>
 
     <div class="stats-section">

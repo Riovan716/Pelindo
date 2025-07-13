@@ -213,7 +213,7 @@
                 </button>
                 
                 @if($tentang)
-                    <button type="button" class="btn-danger" onclick="confirmDelete()">
+                    <button type="button" class="btn-danger" id="btnHapusTentang">
                         <i class="fas fa-trash"></i> Hapus Tentang
                     </button>
                 @endif
@@ -244,12 +244,39 @@
     @endif
 </div>
 
+<div id="deleteModal" style="display:none;position:fixed;z-index:9999;left:0;top:0;width:100vw;height:100vh;background:rgba(0,0,0,0.18);justify-content:center;align-items:center;">
+    <div class="custom-logout-modal">
+        <div class="custom-logout-title" id="deleteModalTitle">Apakah Anda yakin ingin menghapus konten tentang ini?</div>
+        <div class="custom-logout-btns">
+            <button id="cancelDeleteBtn" class="custom-logout-btn cancel">Cancel</button>
+            <button id="confirmDeleteBtn" class="custom-logout-btn yes">Ya</button>
+        </div>
+    </div>
+</div>
 <script>
-function confirmDelete() {
-    if (confirm('Apakah Anda yakin ingin menghapus konten tentang ini? Tindakan ini tidak dapat dibatalkan.')) {
-        document.getElementById('deleteForm').submit();
+document.addEventListener('DOMContentLoaded', function() {
+    var btnHapus = document.getElementById('btnHapusTentang');
+    var deleteModal = document.getElementById('deleteModal');
+    var cancelBtn = document.getElementById('cancelDeleteBtn');
+    var confirmBtn = document.getElementById('confirmDeleteBtn');
+    var deleteForm = document.getElementById('deleteForm');
+    if(btnHapus) {
+        btnHapus.onclick = function() {
+            deleteModal.style.display = 'flex';
+        };
     }
-}
+    cancelBtn.onclick = function() {
+        deleteModal.style.display = 'none';
+    };
+    confirmBtn.onclick = function() {
+        if(deleteForm) deleteForm.submit();
+    };
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            deleteModal.style.display = 'none';
+        }
+    });
+});
 </script>
 
 @endsection

@@ -223,7 +223,8 @@
 const heroImages = [
     "{{ asset('assets/images/Logo.Dashboard1.jpg') }}",
     "{{ asset('assets/images/Logo.Dashboard2.jpg') }}",
-    "{{ asset('assets/images/Logo.Dashboard3.jpg') }}"
+    "{{ asset('assets/images/Logo.Dashboard3.jpg') }}",
+    "{{ asset('assets/images/Logo.Dashboard4.jpg') }}"
 ];
 let heroIdx = 0;
 const heroImg = document.getElementById('hero-slide-img');

@@ -25,10 +25,37 @@
     .table-rekomendasi tr:last-child td {
         border-bottom: none;
     }
-    .file-link {
-        color: #0070c9;
-        text-decoration: underline;
+    .file-link, .review-link {
+        color: #fff;
+        background: #0070c9;
+        border: none;
+        border-radius: 6px;
+        padding: 6px 16px;
+        margin: 0 4px 0 0;
+        text-decoration: none;
         font-weight: 600;
+        font-size: 14px;
+        transition: background 0.2s;
+        display: inline-block;
+        text-align: center;
+    }
+    .file-link:last-child, .review-link:last-child {
+        margin-right: 0;
+    }
+    .file-action-group {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+    }
+    @media (max-width: 600px) {
+        .file-link, .review-link {
+            font-size: 12px;
+            padding: 5px 8px;
+        }
+        .file-action-group {
+            gap: 4px;
+        }
     }
     .expand-row {
         cursor: pointer;
@@ -65,15 +92,18 @@
     </thead>
     <tbody>
         @forelse($rekomendasi as $i => $r)
-            <tr class="expand-row" onclick="window.location='{{ route('admin.rekomendasi.mahasiswa', $r->id) }}'" style="cursor:pointer;">
-                <td>{{ $i+1 }}</td>
-                <td>{{ $r->nama_kampus }}</td>
-                <td>{{ $r->email_kampus }}</td>
-                <td>{{ $r->email_dosen }}</td>
-                <td>{{ $r->nama_dosen }}</td>
-                <td>
+            <tr class="expand-row">
+                <td onclick="window.location='{{ route('admin.rekomendasi.mahasiswa', $r->id) }}'" style="cursor:pointer;">{{ $i+1 }}</td>
+                <td onclick="window.location='{{ route('admin.rekomendasi.mahasiswa', $r->id) }}'" style="cursor:pointer;">{{ $r->nama_kampus }}</td>
+                <td onclick="window.location='{{ route('admin.rekomendasi.mahasiswa', $r->id) }}'" style="cursor:pointer;">{{ $r->email_kampus }}</td>
+                <td onclick="window.location='{{ route('admin.rekomendasi.mahasiswa', $r->id) }}'" style="cursor:pointer;">{{ $r->email_dosen }}</td>
+                <td onclick="window.location='{{ route('admin.rekomendasi.mahasiswa', $r->id) }}'" style="cursor:pointer;">{{ $r->nama_dosen }}</td>
+                <td style="min-width:120px;">
                     @if($r->file)
-                        <a href="{{ asset('storage/'.$r->file) }}" class="file-link" target="_blank">Download</a>
+                        <div class="file-action-group">
+                            <a href="{{ asset('storage/'.$r->file) }}" class="file-link" download onclick="event.stopPropagation();">Download</a>
+                            <a href="{{ asset('storage/'.$r->file) }}" class="review-link" target="_blank" onclick="event.stopPropagation();">Review</a>
+                        </div>
                     @else
                         -
                     @endif

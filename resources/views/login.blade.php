@@ -62,7 +62,8 @@
         }
 
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 18px;
+            width: 100%;
         }
 
         .form-group label {
@@ -70,17 +71,19 @@
             margin-bottom: 8px;
             color: #333;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 15px;
+            width: 100%;
         }
 
         .form-control {
             width: 100%;
-            padding: 15px 20px;
+            padding: 12px 16px;
             border: 2px solid #e1e8ed;
             border-radius: 12px;
-            font-size: 16px;
+            font-size: 15px;
             transition: all 0.3s ease;
             background: #fff;
+            box-sizing: border-box;
         }
 
         .form-control:focus {
@@ -183,20 +186,13 @@
         }
 
         .input-group {
-            position: relative;
+            width: 100%;
         }
-
         .input-group i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #999;
-            z-index: 2;
-        }
-
-        .input-group .form-control {
-            padding-left: 45px;
+            margin-right: 8px;
+            color: #666;
+            font-size: 15px;
+            vertical-align: middle;
         }
 
         @media (max-width: 768px) {
@@ -251,30 +247,20 @@
                 @csrf
 
                 <div class="form-group">
-                    <label for="email">
-                        <i class="fas fa-envelope"></i> Email
-                    </label>
-                    <div class="input-group">
-                        <i class="fas fa-envelope"></i>
-                        <input id="email" type="email" name="email"
-                            class="form-control @error('email') is-invalid @enderror"
-                            placeholder="Masukkan email Anda" required>
-                    </div>
+                    <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                    <input id="email" type="email" name="email"
+                        class="form-control @error('email') is-invalid @enderror"
+                        placeholder="Masukkan email Anda" required>
                     @error('email')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <div class="form-group">
-                    <label for="password">
-                        <i class="fas fa-lock"></i> Password
-                    </label>
-                    <div class="input-group">
-                        <i class="fas fa-lock"></i>
-                        <input id="password" type="password" name="password"
-                            class="form-control @error('password') is-invalid @enderror"
-                            placeholder="Masukkan password Anda" required>
-                    </div>
+                    <label for="password"><i class="fas fa-lock"></i> Password</label>
+                    <input id="password" type="password" name="password"
+                        class="form-control @error('password') is-invalid @enderror"
+                        placeholder="Masukkan password Anda" required>
                     @error('password')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
