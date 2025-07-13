@@ -18,6 +18,7 @@
                                 <th><i class="fas fa-university"></i> Asal Kampus</th>
                                 <th><i class="fas fa-file-alt"></i> Berkas</th>
                                 <th><i class="fas fa-clock"></i> Waktu Daftar</th>
+                                <th><i class="fas fa-cogs"></i> Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -33,6 +34,26 @@
                                         @endforeach
                                     </td>
                                     <td><span class="waktu-badge">{{ $p->created_at->format('d M Y H:i') }}</span></td>
+                                    <td>
+                                        @if($p->status === 'rejected')
+                                            <span style="background:#dc3545;color:#fff;padding:6px 14px;border-radius:8px;font-weight:600;">Rejected</span>
+                                        @elseif($p->status === 'accepted')
+                                            <span style="background:#28a745;color:#fff;padding:6px 14px;border-radius:8px;font-weight:600;">Accepted</span>
+                                        @else
+                                            <form action="{{ route('pendaftar.accept', $p->id) }}" method="POST" style="display:inline-block;">
+                                                @csrf
+                                                <button type="submit" style="background:#28a745;color:#fff;padding:6px 14px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
+                                                    <i class="fas fa-check"></i> Accept
+                                                </button>
+                                            </form>
+                                            <form action="{{ route('pendaftar.reject', $p->id) }}" method="POST" style="display:inline-block;margin-left:6px;">
+                                                @csrf
+                                                <button type="submit" style="background:#dc3545;color:#fff;padding:6px 14px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
+                                                    <i class="fas fa-times"></i> Reject
+                                                </button>
+                                            </form>
+                                        @endif
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

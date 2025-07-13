@@ -100,6 +100,7 @@
                 <a href="{{ route('admin.pengumuman') }}" class="nav-link {{ request()->routeIs('admin.pengumuman*') ? 'active' : '' }}"><i class="fas fa-bullhorn"></i> Pengumuman</a>
                 <a href="{{ route('admin.lowongan') }}" class="nav-link {{ request()->routeIs('admin.lowongan') ? 'active' : '' }}"><i class="fas fa-briefcase"></i> Tambah Lowongan</a>
                 <a href="{{ route('admin.rekomendasi') }}" class="nav-link {{ request()->routeIs('admin.rekomendasi') ? 'active' : '' }}"><i class="fas fa-user-graduate"></i> Rekomendasi Magang</a>
+                <a href="{{ route('admin.pelamar-diterima.index') }}" class="nav-link {{ request()->routeIs('admin.pelamar-diterima.*') ? 'active' : '' }}"><i class="fas fa-user-check"></i> Pelamar Diterima</a>
                 <a href="{{ route('admin.tentang') }}" class="nav-link {{ request()->routeIs('admin.tentang') ? 'active' : '' }}"><i class="fas fa-info-circle"></i> Tambah Tentang</a>
                 <a href="{{ route('actionlogout') }}" class="nav-link" id="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
             </nav>

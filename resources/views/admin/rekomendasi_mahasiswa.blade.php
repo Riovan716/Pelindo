@@ -70,6 +70,7 @@
         <tr>
             <th class="no-col">No</th>
             <th>Nama Mahasiswa</th>
+            <th style="text-align:center;">Aksi</th>
         </tr>
     </thead>
     <tbody>
@@ -77,6 +78,26 @@
             <tr>
                 <td class="no-col">{{ $i+1 }}</td>
                 <td>{{ $m->nama }}</td>
+                <td style="text-align:center;">
+                    @if(isset($m->status) && $m->status === 'accepted')
+                        <span style="background:#28a745;color:#fff;padding:6px 14px;border-radius:8px;font-weight:600;">Accepted</span>
+                    @elseif(isset($m->status) && $m->status === 'rejected')
+                        <span style="background:#dc3545;color:#fff;padding:6px 14px;border-radius:8px;font-weight:600;">Rejected</span>
+                    @else
+                        <form action="{{ route('rekomendasi.mahasiswa.accept', [$rekomendasi->id, $m->id]) }}" method="POST" style="display:inline-block;">
+                            @csrf
+                            <button type="submit" style="background:#28a745;color:#fff;padding:6px 14px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
+                                <i class="fas fa-check"></i> Accept
+                            </button>
+                        </form>
+                        <form action="{{ route('rekomendasi.mahasiswa.reject', [$rekomendasi->id, $m->id]) }}" method="POST" style="display:inline-block;margin-left:6px;">
+                            @csrf
+                            <button type="submit" style="background:#dc3545;color:#fff;padding:6px 14px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
+                                <i class="fas fa-times"></i> Reject
+                            </button>
+                        </form>
+                    @endif
+                </td>
             </tr>
         @empty
             <tr><td colspan="2" style="text-align:center;color:#888;">Belum ada nama mahasiswa.</td></tr>

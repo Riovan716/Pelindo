@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\RekomendasiMagang;
 use App\Models\NamaMahasiswa;
+use App\Models\MahasiswaDiterima;
 
 class RekomendasiMagangController extends Controller
 {
@@ -58,5 +59,34 @@ class RekomendasiMagangController extends Controller
     {
         $rekomendasi = \App\Models\RekomendasiMagang::with('nama_mahasiswa')->findOrFail($id);
         return view('admin.rekomendasi_mahasiswa', compact('rekomendasi'));
+    }
+
+    public function acceptMahasiswa($rekomendasi_id, $mahasiswa_id)
+    {
+        $mahasiswa = NamaMahasiswa::where('rekomendasi_magang_id', $rekomendasi_id)->findOrFail($mahasiswa_id);
+        $rekomendasi = RekomendasiMagang::findOrFail($rekomendasi_id);
+        // Cegah duplikasi
+        if (!MahasiswaDiterima::where('nama', $mahasiswa->nama)->where('asal_kampus', $rekomendasi->nama_kampus)->exists()) {
+            MahasiswaDiterima::create([
+                'pendaftar_id' => null,
+                'nama' => $mahasiswa->nama,
+                'email' => $rekomendasi->email_kampus,
+                'nomor_telepon' => null,
+                'asal_kampus' => $rekomendasi->nama_kampus,
+                'lowongan_id' => null,
+                'tanggal_diterima' => now(),
+            ]);
+        }
+        $mahasiswa->status = 'accepted';
+        $mahasiswa->save();
+        return back()->with('success', 'Mahasiswa diterima!');
+    }
+
+    public function rejectMahasiswa($rekomendasi_id, $mahasiswa_id)
+    {
+        $mahasiswa = NamaMahasiswa::where('rekomendasi_magang_id', $rekomendasi_id)->findOrFail($mahasiswa_id);
+        $mahasiswa->status = 'rejected';
+        $mahasiswa->save();
+        return back()->with('success', 'Mahasiswa ditolak!');
     }
 }

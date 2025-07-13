@@ -91,10 +91,19 @@ Route::get('/pengumuman/{id}', [PengumumanController::class, 'show'])->name('pen
 
 Route::get('/lowongan/{id}/daftar', [PendaftarController::class, 'create'])->name('pendaftar.create');
 Route::post('/lowongan/{id}/daftar', [PendaftarController::class, 'store'])->name('pendaftar.store');
+Route::post('/pendaftar/{id}/accept', [App\Http\Controllers\PendaftarController::class, 'accept'])->name('pendaftar.accept');
+Route::post('/pendaftar/{id}/reject', [App\Http\Controllers\PendaftarController::class, 'reject'])->name('pendaftar.reject');
 
 Route::get('/admin/lowongan/{id}/pendaftar', [PendaftarController::class, 'listByLowongan'])->name('admin.lowongan.pendaftar');
 
 Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/rekomendasi-magang', [\App\Http\Controllers\RekomendasiMagangController::class, 'adminIndex'])->name('admin.rekomendasi');
     Route::get('/rekomendasi-magang/{id}/mahasiswa', [\App\Http\Controllers\RekomendasiMagangController::class, 'adminMahasiswa'])->name('admin.rekomendasi.mahasiswa');
+    Route::post('/admin/rekomendasi-magang/{rekomendasi}/mahasiswa/{mahasiswa}/accept', [App\Http\Controllers\RekomendasiMagangController::class, 'acceptMahasiswa'])->name('rekomendasi.mahasiswa.accept');
+    Route::post('/admin/rekomendasi-magang/{rekomendasi}/mahasiswa/{mahasiswa}/reject', [App\Http\Controllers\RekomendasiMagangController::class, 'rejectMahasiswa'])->name('rekomendasi.mahasiswa.reject');
+    
+    // Pelamar Diterima routes
+    Route::get('/pelamar-diterima', [\App\Http\Controllers\Admin\PelamarDiterimaController::class, 'index'])->name('admin.pelamar-diterima.index');
+    Route::get('/pelamar-diterima/{id}', [\App\Http\Controllers\Admin\PelamarDiterimaController::class, 'show'])->name('admin.pelamar-diterima.show');
+    Route::put('/pelamar-diterima/{id}/status', [\App\Http\Controllers\Admin\PelamarDiterimaController::class, 'updateStatus'])->name('admin.pelamar-diterima.update-status');
 });

@@ -9,6 +9,7 @@ class NamaMahasiswa extends Model
     protected $fillable = [
         'rekomendasi_magang_id',
         'nama',
+        'status',
     ];
 
     public function rekomendasiMagang()
