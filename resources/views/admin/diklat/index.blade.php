@@ -14,31 +14,41 @@
                 <table class="diklat-table">
                     <thead>
                         <tr>
+                            <th>No</th>
                             <th>Judul</th>
-                            <th>Tanggal</th>
                             <th>Deskripsi</th>
+                            <th>Tanggal</th>
                             <th>File</th>
+                            <th>Link</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($diklats as $d)
+                        @forelse($diklats as $index => $diklat)
                             <tr>
-                                <td title="{{ $d->judul }}">{{ Str::limit($d->judul, 40) }}</td>
-                                <td>{{ $d->tanggal }}</td>
-                                <td title="{{ $d->deskripsi }}">{{ Str::limit($d->deskripsi, 30) }}</td>
+                                <td>{{ $index + 1 }}</td>
+                                <td title="{{ $diklat->judul }}">{{ Str::limit($diklat->judul, 40) }}</td>
+                                <td title="{{ $diklat->deskripsi }}">{{ Str::limit($diklat->deskripsi, 30) }}</td>
+                                <td>{{ $diklat->tanggal }}</td>
                                 <td>
-                                    @if($d->file)
-                                        <a href="{{ asset('storage/'.$d->file) }}" target="_blank" class="file-link"><i class="fas fa-paperclip"></i> Download</a>
+                                    @if($diklat->file)
+                                        <a href="{{ asset('storage/'.$diklat->file) }}" target="_blank" class="file-link"><i class="fas fa-paperclip"></i> Download</a>
                                     @else
                                         <span class="file-empty">-</span>
                                     @endif
                                 </td>
                                 <td>
+                                    @if($diklat->link)
+                                        <a href="{{ $diklat->link }}" target="_blank" class="link-link">Lihat Link</a>
+                                    @else
+                                        <span class="link-empty">-</span>
+                                    @endif
+                                </td>
+                                <td>
                                     <div class="aksi-group">
-                                        <a href="{{ route('admin.diklat.show', $d->id) }}" class="aksi-btn detail" title="Lihat Detail"><i class="fas fa-eye"></i></a>
-                                        <a href="{{ route('admin.diklat.edit', $d->id) }}" class="aksi-btn edit" title="Edit"><i class="fas fa-edit"></i></a>
-                                        <form action="{{ route('admin.diklat.destroy', $d->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Yakin hapus?')">
+                                        <a href="{{ route('admin.diklat.show', $diklat->id) }}" class="aksi-btn detail" title="Lihat Detail"><i class="fas fa-eye"></i></a>
+                                        <a href="{{ route('admin.diklat.edit', $diklat->id) }}" class="aksi-btn edit" title="Edit"><i class="fas fa-edit"></i></a>
+                                        <form action="{{ route('admin.diklat.destroy', $diklat->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Yakin hapus?')">
                                             @csrf @method('DELETE')
                                             <button type="submit" class="aksi-btn hapus" title="Hapus"><i class="fas fa-trash"></i></button>
                                         </form>
@@ -46,7 +56,7 @@
                                 </td>
                             </tr>
                         @empty
-                            <tr><td colspan="5" class="empty-row">Belum ada data.</td></tr>
+                            <tr><td colspan="7" class="empty-row">Belum ada data.</td></tr>
                         @endforelse
                     </tbody>
                 </table>
@@ -138,11 +148,13 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-        .diklat-table th:nth-child(1), .diklat-table td:nth-child(1) { width: 32%; }
-        .diklat-table th:nth-child(2), .diklat-table td:nth-child(2) { width: 14%; }
+        .diklat-table th:nth-child(1), .diklat-table td:nth-child(1) { width: 5%; }
+        .diklat-table th:nth-child(2), .diklat-table td:nth-child(2) { width: 32%; }
         .diklat-table th:nth-child(3), .diklat-table td:nth-child(3) { width: 28%; }
-        .diklat-table th:nth-child(4), .diklat-table td:nth-child(4) { width: 12%; }
+        .diklat-table th:nth-child(4), .diklat-table td:nth-child(4) { width: 14%; }
         .diklat-table th:nth-child(5), .diklat-table td:nth-child(5) { width: 14%; }
+        .diklat-table th:nth-child(6), .diklat-table td:nth-child(6) { width: 14%; }
+        .diklat-table th:nth-child(7), .diklat-table td:nth-child(7) { width: 14%; }
         .file-link {
             color: #0070c9;
             text-decoration: none;
@@ -155,6 +167,21 @@
             text-decoration: underline;
         }
         .file-empty {
+            color: #bbb;
+            font-size: 15px;
+        }
+        .link-link {
+            color: #0070c9;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .link-link:hover {
+            color: #005fa3;
+            text-decoration: underline;
+        }
+        .link-empty {
             color: #bbb;
             font-size: 15px;
         }

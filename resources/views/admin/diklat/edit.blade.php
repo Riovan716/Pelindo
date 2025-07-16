@@ -32,6 +32,11 @@
                 <input type="file" name="file" class="form-control-file @error('file') is-invalid @enderror">
                 @error('file') <div class="invalid-feedback">{{ $message }}</div> @enderror
             </div>
+            <div class="form-group">
+                <label for="link">Link (opsional)</label>
+                <input type="text" name="link" id="link" class="form-control" value="{{ old('link', $diklat->link) }}" placeholder="Masukkan link terkait (jika ada)">
+                @error('link') <div class="form-error">{{ $message }}</div> @enderror
+            </div>
             <div class="form-actions">
                 <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Update</button>
                 <a href="{{ route('admin.diklat.index') }}" class="btn btn-secondary">Batal</a>

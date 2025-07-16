@@ -16,6 +16,7 @@ class Diklat extends Model
         'deskripsi',
         'tanggal',
         'file',
+        'link',
     ];
 }
 

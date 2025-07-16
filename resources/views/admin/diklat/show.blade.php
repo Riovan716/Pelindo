@@ -9,6 +9,13 @@
             <div class="detail-row"><span class="detail-label">Judul:</span> <span class="detail-value">{{ $diklat->judul }}</span></div>
             <div class="detail-row"><span class="detail-label">Deskripsi:</span> <span class="detail-value">{{ $diklat->deskripsi }}</span></div>
             <div class="detail-row"><span class="detail-label">Tanggal:</span> <span class="detail-value">{{ $diklat->tanggal }}</span></div>
+            <div class="detail-row"><span class="detail-label">Link:</span> <span class="detail-value">
+                @if($diklat->link)
+                    <a href="{{ $diklat->link }}" target="_blank">{{ $diklat->link }}</a>
+                @else
+                    <span class="file-empty">-</span>
+                @endif
+            </span></div>
             <div class="detail-row"><span class="detail-label">File:</span> <span class="detail-value">
                 @if($diklat->file)
                     <a href="{{ asset('storage/'.$diklat->file) }}" target="_blank" class="file-link"><i class="fas fa-paperclip"></i> Download File</a>

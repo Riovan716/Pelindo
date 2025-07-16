@@ -26,6 +26,7 @@ class DiklatController extends Controller
             'deskripsi' => 'required|string',
             'tanggal' => 'required|date',
             'file' => 'nullable|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:4096',
+            'link' => 'nullable|string|max:255',
         ]);
         if ($request->hasFile('file')) {
             $validated['file'] = $request->file('file')->store('diklat', 'public');
@@ -51,6 +52,7 @@ class DiklatController extends Controller
             'deskripsi' => 'required|string',
             'tanggal' => 'required|date',
             'file' => 'nullable|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:4096',
+            'link' => 'nullable|string|max:255',
         ]);
         if ($request->hasFile('file')) {
             if ($diklat->file) {
