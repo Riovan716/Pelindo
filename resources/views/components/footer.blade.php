@@ -41,24 +41,21 @@
         ">
             <!-- KANTOR PUSAT -->
             <div style="flex: 1; min-width: 260px; max-width: 350px; color: #fff;">
-                <h2 style="font-size: 1.2rem; font-weight: bold; margin-bottom: 18px; letter-spacing: 1px; text-transform: uppercase;">KANTOR PUSAT</h2>
+                <h2 style="font-size: 1.2rem; font-weight: bold; margin-bottom: 18px; letter-spacing: 1px; text-transform: uppercase;">KANTOR CABANG BELAWAN</h2>
                 <div style="font-size: 1rem; line-height: 1.7;">
-                    PT Pelabuhan Indonesia (Persero)<br>
-                    Pelindo Tower, Jl. Yos Sudarso No.9,<br>
-                    Jakarta Utara 14230<br><br>
-                    <b>CUSTOMER CARE PELINDO</b><br>
-                    <span style="font-size: 1.1em; color: #ffb6c1;">📞 102</span><br>
-                    WhatsApp : 0811-1552-102 (chat only)<br>
-                    <span style="font-size: 1em; color: #fff;">✉ customer.care@pelindo.co.id</span>
+                    PT Pelabuhan Indonesia (Persero) Regional 1 Cabang Belawan<br>
+                    Alamat : Kapten R.Sulian No. 1, Belawan, Sumatera Utara 20411<br><br>
+                    <b>Email</b> : <span style="font-size: 1em; color: #fff;">belawan@pelindo.co.id</span><br>
+                    <b>No. Telp</b> : <span style="font-size: 1.1em; color: #ffb6c1;">+62 61 6941919</span>
                 </div>
             </div>
             <!-- LINK TERKAIT -->
             <div style="flex: 1; min-width: 220px; max-width: 350px; color: #fff;">
                 <h2 style="font-size: 1.2rem; font-weight: bold; margin-bottom: 18px; letter-spacing: 1px; text-transform: uppercase;">LINK TERKAIT</h2>
                 <div style="font-size: 1rem; line-height: 1.7;">
+                    <a href="https://www.danantaraindonesia.com/" target="_blank" rel="noopener" style="color: #fff; text-decoration: underline;">Danantara Indonesia</a><br>
                     <a href="https://bumn.go.id/" target="_blank" rel="noopener" style="color: #fff; text-decoration: underline;">Kementerian BUMN RI</a><br>
-                    <a href="https://dephub.go.id/" target="_blank" rel="noopener" style="color: #fff; text-decoration: underline;">Kementerian Perhubungan RI</a><br>
-                    <a href="https://museum-maritimindonesia.co.id/" target="_blank" rel="noopener" style="color: #fff; text-decoration: underline;">Museum Maritim Indonesia</a>
+                    <a href="https://dephub.go.id/" target="_blank" rel="noopener" style="color: #fff; text-decoration: underline;">Kementerian Perhubungan RI</a>
                 </div>
             </div>
             <!-- SOCIAL MEDIA -->
@@ -67,7 +64,7 @@
                 <div style="display: flex; gap: 18px; margin-top: 18px;">
                     <a href="https://twitter.com/pelindonesia" target="_blank" rel="noopener" style="background: #fff; color: #0d7bc1; border-radius: 8px; padding: 8px 12px; font-size: 2rem; display: flex; align-items: center;"><i class='bx bxl-twitter'></i></a>
                     <a href="https://facebook.com/pelindonesia" target="_blank" rel="noopener" style="background: #fff; color: #0d7bc1; border-radius: 8px; padding: 8px 12px; font-size: 2rem; display: flex; align-items: center;"><i class='bx bxl-facebook'></i></a>
-                    <a href="https://instagram.com/pelindonesia" target="_blank" rel="noopener" style="background: #fff; color: #0d7bc1; border-radius: 8px; padding: 8px 12px; font-size: 2rem; display: flex; align-items: center;"><i class='bx bxl-instagram'></i></a>
+                    <a href="https://www.instagram.com/pelindo_belawan" target="_blank" rel="noopener" style="background: #fff; color: #0d7bc1; border-radius: 8px; padding: 8px 12px; font-size: 2rem; display: flex; align-items: center;"><i class='bx bxl-instagram'></i></a>
                     <a href="https://youtube.com/@pelindonesia" target="_blank" rel="noopener" style="background: #fff; color: #0d7bc1; border-radius: 8px; padding: 8px 12px; font-size: 2rem; display: flex; align-items: center;"><i class='bx bxl-youtube'></i></a>
                 </div>
             </div>

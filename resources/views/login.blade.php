@@ -273,8 +273,10 @@
         </div>
 
         <div class="side-info">
-            <h2><i class="fas fa-shield-alt"></i> PPSDM</h2>
-            <p><strong>Pengelolaan & Pembelajaran<br>Sumber Daya Manusia</strong></p>
+            <a href="{{ route('beranda') }}" style="text-decoration:none;color:inherit;cursor:pointer;display:block;">
+                <h2><i class="fas fa-shield-alt"></i> PPSDM</h2>
+                <p><strong>Pengelolaan & Pembelajaran<br>Sumber Daya Manusia</strong></p>
+            </a>
             <img src="{{ asset('assets/images/logo-login.jpg') }}" alt="Logo PPSDM">
         </div>
     </div>

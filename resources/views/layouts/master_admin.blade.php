@@ -63,7 +63,7 @@
     </style>
 </head>
 <body>
-    <button class="mobile-toggle" onclick="toggleSidebar()" id="sidebarToggle">
+    <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Toggle Sidebar">
         <i class="fas fa-bars"></i>
     </button>
     <div class="admin-container">
@@ -95,14 +95,14 @@
                 <p style="color:#b3e0f7; text-align:center;">Pelindo Management</p>
             </div>
             <nav class="nav-menu">
-                <a href="{{ route('admin.dashboard') }}" class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-                <a href="{{ route('admin.berita.index') }}" class="nav-link {{ request()->routeIs('admin.berita.*') ? 'active' : '' }}"><i class="fas fa-newspaper"></i> Berita</a>
-                <a href="{{ route('admin.pengumuman') }}" class="nav-link {{ request()->routeIs('admin.pengumuman*') ? 'active' : '' }}"><i class="fas fa-bullhorn"></i> Pengumuman</a>
-                <a href="{{ route('admin.lowongan') }}" class="nav-link {{ request()->routeIs('admin.lowongan') ? 'active' : '' }}"><i class="fas fa-briefcase"></i> Tambah Lowongan</a>
-                <a href="{{ route('admin.rekomendasi') }}" class="nav-link {{ request()->routeIs('admin.rekomendasi') ? 'active' : '' }}"><i class="fas fa-user-graduate"></i> Rekomendasi Magang</a>
-                <a href="{{ route('admin.pelamar-diterima.index') }}" class="nav-link {{ request()->routeIs('admin.pelamar-diterima.*') ? 'active' : '' }}"><i class="fas fa-user-check"></i> Pelamar Diterima</a>
-                <a href="{{ route('admin.tentang') }}" class="nav-link {{ request()->routeIs('admin.tentang') ? 'active' : '' }}"><i class="fas fa-info-circle"></i> Tambah Tentang</a>
-                <a href="{{ route('actionlogout') }}" class="nav-link" id="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                <a href="{{ route('admin.dashboard') }}" class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" onclick="closeSidebarOnMobile()"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="{{ route('admin.berita.index') }}" class="nav-link {{ request()->routeIs('admin.berita.*') ? 'active' : '' }}" onclick="closeSidebarOnMobile()"><i class="fas fa-newspaper"></i> Berita</a>
+                <a href="{{ route('admin.pengumuman') }}" class="nav-link {{ request()->routeIs('admin.pengumuman*') ? 'active' : '' }}" onclick="closeSidebarOnMobile()"><i class="fas fa-bullhorn"></i> Pengumuman</a>
+                <a href="{{ route('admin.lowongan') }}" class="nav-link {{ request()->routeIs('admin.lowongan') ? 'active' : '' }}" onclick="closeSidebarOnMobile()"><i class="fas fa-briefcase"></i> Tambah Lowongan</a>
+                <a href="{{ route('admin.rekomendasi') }}" class="nav-link {{ request()->routeIs('admin.rekomendasi') ? 'active' : '' }}" onclick="closeSidebarOnMobile()"><i class="fas fa-user-graduate"></i> Rekomendasi Magang</a>
+                <a href="{{ route('admin.pelamar-diterima.index') }}" class="nav-link {{ request()->routeIs('admin.pelamar-diterima.*') ? 'active' : '' }}" onclick="closeSidebarOnMobile()"><i class="fas fa-user-check"></i> Pelamar Diterima</a>
+                <a href="{{ route('admin.tentang') }}" class="nav-link {{ request()->routeIs('admin.tentang') ? 'active' : '' }}" onclick="closeSidebarOnMobile()"><i class="fas fa-info-circle"></i> Tambah Tentang</a>
+                <a href="{{ route('actionlogout') }}" class="nav-link" id="logout-link" onclick="closeSidebarOnMobile()"><i class="fas fa-sign-out-alt"></i> Logout</a>
             </nav>
         </div>
         <!-- Main Content -->
@@ -137,6 +137,14 @@
             overflow-y: auto;
             transition: transform 0.3s cubic-bezier(.4,2,.6,1), box-shadow 0.3s;
             z-index: 2000;
+            left: 0;
+            top: 0;
+        }
+        .sidebar.open {
+            transform: translateX(0);
+        }
+        .sidebar:not(.open) {
+            transform: translateX(-110%);
         }
         .sidebar-header {
             padding: 30px 20px 10px 20px;
@@ -176,6 +184,10 @@
             padding: 40px 30px 30px 30px;
             background: #fff;
             min-height: 100vh;
+            transition: margin-left 0.3s cubic-bezier(.4,2,.6,1);
+        }
+        .sidebar:not(.open) ~ .main-content {
+            margin-left: 0 !important;
         }
         .content-header {
             background: #0070c9;
@@ -220,9 +232,32 @@
         .mobile-toggle:hover {
             background: #005fa3;
         }
+        .sidebar-toggle-btn {
+            display: block;
+            position: fixed;
+            top: 18px;
+            left: 18px;
+            z-index: 3001;
+            background: #0070c9;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 22px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px #0070c91a;
+            transition: background 0.2s;
+        }
+        .sidebar-toggle-btn:hover {
+            background: #005fa3;
+        }
         @media (max-width: 900px) {
             .main-content {
-                padding: 20px 5px 20px 5px;
+                margin-left: 0;
+                padding: 24px 6px 24px 6px;
+            }
+            .admin-container {
+                flex-direction: column;
             }
         }
         @media (max-width: 768px) {
@@ -241,6 +276,14 @@
             }
             .mobile-toggle {
                 display: block;
+            }
+        }
+        @media (max-width: 600px) {
+            .sidebar-toggle-btn {
+                top: 10px;
+                left: 10px;
+                font-size: 18px;
+                padding: 7px 10px;
             }
         }
     </style>
@@ -343,5 +386,37 @@
         });
     });
     </script>
+    <script>
+    const sidebar = document.getElementById('sidebar');
+    const toggleBtn = document.getElementById('sidebarToggleBtn');
+    function toggleSidebar() {
+        sidebar.classList.toggle('open');
+        // Atur main-content margin
+        const mainContent = document.querySelector('.main-content');
+        if (!sidebar.classList.contains('open')) {
+            mainContent.style.marginLeft = '0';
+        } else {
+            mainContent.style.marginLeft = '260px';
+        }
+    }
+    function closeSidebarOnMobile() {
+        sidebar.classList.remove('open');
+        const mainContent = document.querySelector('.main-content');
+        mainContent.style.marginLeft = '0';
+    }
+    toggleBtn.addEventListener('click', function() {
+        toggleSidebar();
+    });
+    // Optional: close sidebar when clicking outside (mobile)
+    document.addEventListener('click', function(e) {
+        if(sidebar.classList.contains('open')) {
+            if(!sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
+                sidebar.classList.remove('open');
+                const mainContent = document.querySelector('.main-content');
+                mainContent.style.marginLeft = '0';
+            }
+        }
+    });
+</script>
 </body>
 </html>

@@ -10,6 +10,7 @@
         font-family: 'Poppins', 'Segoe UI', 'Roboto', Arial, sans-serif;
         background: #f4fbfd;
     }
+    
     .hero-section {
         padding: 80px 40px 60px 40px;
         color: #000;
@@ -207,8 +208,8 @@
             <h4>PT Pelindo Multi Terminal</h4>
             <p>
                 Selamat datang di <b>Portal Pengelolaan dan Pembelajaran SDM PT Pelindo Multi Terminal</b>.<br>
-                Kami berkomitmen untuk meningkatkan kualitas dan kapasitas seluruh insan Pelindo melalui platform yang <b>terintegrasi</b> dan <b>adaptif</b>.<br><br>
-                Platform ini menyediakan akses informasi terkini seputar berita perusahaan, pengumuman penting, serta peluang pengembangan karier dan pelatihan yang menunjang performa profesional Anda di dunia kerja.
+                Kami berkomitmen mendukung proses digitalisasi dalam pengelolaan pengumuman, informasi lowongan magang, serta layanan rekomendasi magang secara terintegrasi dan efisien.<br><br>
+                Portal ini menyediakan akses informasi terkini seputar berita perusahaan, pengumuman resmi, hingga proses pendaftaran magang yang mudah diakses baik oleh admin maupun mahasiswa.
             </p>
         </div>
         <div class="hero-right">

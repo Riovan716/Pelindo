@@ -146,12 +146,70 @@
         ul {
             padding-left: 20px;
         }
+        .nav-toggle-btn {
+            display: none;
+            background: #0070c9;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 22px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px #0070c91a;
+            transition: background 0.2s;
+            position: absolute;
+            right: 24px;
+            top: 18px;
+            z-index: 1002;
+        }
+        .nav-toggle-btn:hover {
+            background: #005fa3;
+        }
+        nav {
+            display: flex;
+            gap: 32px;
+            transition: max-height 0.3s, opacity 0.3s;
+        }
         @media (max-width: 900px) {
-            .header-top, .header-bottom {
-                padding: 12px 10px;
+            .header-top {
+                flex-direction: row;
+                align-items: flex-start;
+                position: relative;
             }
-            main {
-                padding: 20px 5px;
+            .nav-toggle-btn {
+                display: block;
+            }
+            nav {
+                flex-direction: column;
+                position: absolute;
+                right: 0;
+                top: 60px;
+                background: #fff;
+                box-shadow: 0 8px 32px rgba(0,112,201,0.10);
+                border-radius: 0 0 16px 16px;
+                width: 210px;
+                max-height: 0;
+                overflow: hidden;
+                opacity: 0;
+                z-index: 1001;
+                gap: 0;
+                padding: 0;
+            }
+            nav.open {
+                max-height: 500px;
+                opacity: 1;
+                padding: 12px 0 12px 0;
+            }
+            nav a {
+                display: block;
+                padding: 14px 28px;
+                color: #0070c9;
+                font-size: 16px;
+                border-bottom: 1px solid #e0e0e0;
+                background: #fff;
+            }
+            nav a:last-child {
+                border-bottom: none;
             }
         }
     </style>
@@ -162,15 +220,20 @@
 
     {{-- Header --}}
     <div class="header">
-        <div style="display: flex; justify-content: space-between; align-items: center; padding: 18px 48px 10px 48px; background: transparent;">
-            <div class="branding">
-                <img src="{{ asset('assets/images/ppsdm-logo.png') }}" alt="Logo PPSDM">
-                <div class="branding-text">
-                    <span class="ppsdm-text">PPSDM</span>
-                    <span class="subtitle">Pengelolaan & Pembelajaran<br>Sumber Daya Manusia</span>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 18px 48px 10px 48px; background: transparent; position:relative;" class="header-top">
+            <a href="{{ route('beranda') }}" style="text-decoration:none;color:inherit;display:flex;align-items:center;gap:18px;cursor:pointer;">
+                <div class="branding" style="display:flex;align-items:center;gap:14px;">
+                    <img src="{{ asset('assets/images/ppsdm-logo.png') }}" alt="Logo PPSDM" style="height:44px;">
+                    <div class="branding-text">
+                        <span class="ppsdm-text">PPSDM</span>
+                        <span class="subtitle">Pengelolaan & Pembelajaran<br>Sumber Daya Manusia</span>
+                    </div>
                 </div>
-            </div>
-            <nav>
+            </a>
+            <button class="nav-toggle-btn" id="navToggleBtn" aria-label="Toggle Navigation">
+                <i class='bx bx-menu'></i>
+            </button>
+            <nav id="mainNav">
                 <a href="{{ route('beranda') }}" class="{{ request()->routeIs('beranda') ? 'active' : '' }}">Beranda</a>
                 <a href="{{ route('berita.public') }}" class="{{ request()->routeIs('berita') ? 'active' : '' }}">Berita</a>
                 <a href="{{ route('pengumuman') }}" class="{{ request()->routeIs('pengumuman') ? 'active' : '' }}">Pengumuman</a>
@@ -181,6 +244,21 @@
             </nav>
         </div>
     </div>
+    <script>
+        const navBtn = document.getElementById('navToggleBtn');
+        const nav = document.getElementById('mainNav');
+        navBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            nav.classList.toggle('open');
+        });
+        // Hapus event listener document click yang menutup menu jika klik di luar nav/navBtn
+        // Tutup menu jika link diklik (mobile)
+        nav.querySelectorAll('a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                if(window.innerWidth <= 900) nav.classList.remove('open');
+            });
+        });
+    </script>
 
     {{-- Konten Halaman --}}
     <main>
