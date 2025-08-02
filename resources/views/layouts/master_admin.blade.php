@@ -95,14 +95,14 @@
                 <p style="color:#b3e0f7; text-align:center;">Pelindo Management</p>
             </div>
             <nav class="nav-menu">
-                <a href="{{ route('admin.dashboard') }}" class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" onclick="closeSidebarOnMobile()"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-                <a href="{{ route('admin.berita.index') }}" class="nav-link {{ request()->routeIs('admin.berita.*') ? 'active' : '' }}" onclick="closeSidebarOnMobile()"><i class="fas fa-newspaper"></i> Berita</a>
-                <a href="{{ route('admin.pengumuman') }}" class="nav-link {{ request()->routeIs('admin.pengumuman*') ? 'active' : '' }}" onclick="closeSidebarOnMobile()"><i class="fas fa-bullhorn"></i> Pengumuman</a>
-                <a href="{{ route('admin.lowongan') }}" class="nav-link {{ request()->routeIs('admin.lowongan') ? 'active' : '' }}" onclick="closeSidebarOnMobile()"><i class="fas fa-briefcase"></i> Tambah Lowongan</a>
-                <a href="{{ route('admin.rekomendasi') }}" class="nav-link {{ request()->routeIs('admin.rekomendasi') ? 'active' : '' }}" onclick="closeSidebarOnMobile()"><i class="fas fa-user-graduate"></i> Rekomendasi Magang</a>
-                <a href="{{ route('admin.pelamar-diterima.index') }}" class="nav-link {{ request()->routeIs('admin.pelamar-diterima.*') ? 'active' : '' }}" onclick="closeSidebarOnMobile()"><i class="fas fa-user-check"></i> Pelamar Diterima</a>
-                <a href="{{ route('admin.tentang') }}" class="nav-link {{ request()->routeIs('admin.tentang') ? 'active' : '' }}" onclick="closeSidebarOnMobile()"><i class="fas fa-info-circle"></i> Tambah Tentang</a>
-                <a href="{{ route('actionlogout') }}" class="nav-link" id="logout-link" onclick="closeSidebarOnMobile()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                <a href="{{ route('admin.dashboard') }}" class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" onclick="closeSidebarOnMobile()"><i class="fas fa-tachometer-alt"></i> <span class="menu-text">Dashboard</span></a>
+                <a href="{{ route('admin.berita.index') }}" class="nav-link {{ request()->routeIs('admin.berita.*') ? 'active' : '' }}" onclick="closeSidebarOnMobile()"><i class="fas fa-newspaper"></i> <span class="menu-text">Berita</span></a>
+                <a href="{{ route('admin.pengumuman') }}" class="nav-link {{ request()->routeIs('admin.pengumuman*') ? 'active' : '' }}" onclick="closeSidebarOnMobile()"><i class="fas fa-bullhorn"></i> <span class="menu-text">Pengumuman</span></a>
+                <a href="{{ route('admin.lowongan') }}" class="nav-link {{ request()->routeIs('admin.lowongan') ? 'active' : '' }}" onclick="closeSidebarOnMobile()"><i class="fas fa-briefcase"></i> <span class="menu-text">Tambah Lowongan</span></a>
+                <a href="{{ route('admin.rekomendasi') }}" class="nav-link {{ request()->routeIs('admin.rekomendasi') ? 'active' : '' }}" onclick="closeSidebarOnMobile()"><i class="fas fa-user-graduate"></i> <span class="menu-text">Rekomendasi Magang</span></a>
+                <a href="{{ route('admin.pelamar-diterima.index') }}" class="nav-link {{ request()->routeIs('admin.pelamar-diterima.*') ? 'active' : '' }}" onclick="closeSidebarOnMobile()"><i class="fas fa-user-check"></i> <span class="menu-text">Pelamar Diterima</span></a>
+                <a href="{{ route('admin.tentang') }}" class="nav-link {{ request()->routeIs('admin.tentang') ? 'active' : '' }}" onclick="closeSidebarOnMobile()"><i class="fas fa-info-circle"></i> <span class="menu-text">Tambah Tentang</span></a>
+                <a href="{{ route('actionlogout') }}" class="nav-link" id="logout-link" onclick="closeSidebarOnMobile()"><i class="fas fa-sign-out-alt"></i> <span class="menu-text">Logout</span></a>
             </nav>
         </div>
         <!-- Main Content -->
@@ -135,27 +135,47 @@
             position: fixed;
             height: 100vh;
             overflow-y: auto;
-            transition: transform 0.3s cubic-bezier(.4,2,.6,1), box-shadow 0.3s;
+            transition: transform 0.3s cubic-bezier(.4,2,.6,1), box-shadow 0.3s, width 0.3s;
             z-index: 2000;
             left: 0;
             top: 0;
         }
         .sidebar.open {
-            transform: translateX(0);
+            width: 260px;
+        }
+        .sidebar.closed {
+            width: 64px;
         }
         .sidebar:not(.open) {
-            transform: translateX(-110%);
+            transform: translateX(0); /* Tetap di tempat, hanya kecil */
         }
-        .sidebar-header {
-            padding: 30px 20px 10px 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            text-align: center;
+        .sidebar-header h1,
+        .sidebar-header p,
+        .nav-link span.menu-text {
+            transition: opacity 0.2s, width 0.2s;
+        }
+        .sidebar.closed .sidebar-header h1,
+        .sidebar.closed .sidebar-header p,
+        .sidebar.closed .nav-link span.menu-text {
+            opacity: 0;
+            width: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .sidebar.closed .sidebar-header {
+            padding-left: 0;
+            padding-right: 0;
+        }
+        .sidebar.closed .nav-menu {
+            margin-top: 20px;
+            align-items: center;
+            gap: 6px;
         }
         .nav-menu {
             display: flex;
             flex-direction: column;
             gap: 6px;
-            margin-top: 20px;
+            margin-top: 10px;
         }
         .nav-link {
             display: flex;
@@ -167,7 +187,7 @@
             border-radius: 8px;
             font-weight: 500;
             font-size: 15px;
-            transition: background 0.2s, color 0.2s;
+            transition: background 0.2s, color 0.2s, padding 0.2s;
         }
         .nav-link.active, .nav-link:hover {
             background: #005fa3;
@@ -178,6 +198,10 @@
             text-align: center;
             font-size: 16px;
         }
+        .nav-link span.menu-text {
+            display: inline-block;
+            white-space: nowrap;
+        }
         .main-content {
             flex: 1;
             margin-left: 260px;
@@ -185,9 +209,13 @@
             background: #fff;
             min-height: 100vh;
             transition: margin-left 0.3s cubic-bezier(.4,2,.6,1);
+            margin-top: 10px;
         }
-        .sidebar:not(.open) ~ .main-content {
-            margin-left: 0 !important;
+        .sidebar.closed ~ .main-content {
+            margin-left: 64px !important;
+        }
+        .sidebar.open ~ .main-content {
+            margin-left: 260px !important;
         }
         .content-header {
             background: #0070c9;
@@ -235,18 +263,18 @@
         .sidebar-toggle-btn {
             display: block;
             position: fixed;
-            top: 18px;
-            left: 18px;
+            top: 20px;
+            left: 20px;
             z-index: 3001;
             background: #0070c9;
             color: #fff;
             border: none;
             border-radius: 8px;
-            padding: 10px 14px;
-            font-size: 22px;
+            padding: 10px 12px;
+            font-size: 20px;
             cursor: pointer;
-            box-shadow: 0 2px 8px #0070c91a;
-            transition: background 0.2s;
+            box-shadow: 0 4px 16px #0070c930;
+            transition: background 0.2s, box-shadow 0.2s;
         }
         .sidebar-toggle-btn:hover {
             background: #005fa3;
@@ -280,11 +308,42 @@
         }
         @media (max-width: 600px) {
             .sidebar-toggle-btn {
-                top: 10px;
-                left: 10px;
+                top: 15px;
+                left: 15px;
                 font-size: 18px;
-                padding: 7px 10px;
+                padding: 8px 10px;
             }
+            .sidebar-header {
+                padding: 50px 15px 15px 15px;
+            }
+            .sidebar.closed .sidebar-header {
+                padding: 40px 0 8px 0;
+            }
+        }
+        .sidebar-header img {
+            width: 60px;
+            height: auto;
+            margin-bottom: 10px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            transition: width 0.2s, margin 0.2s;
+        }
+        .sidebar.closed .sidebar-header img {
+            display: none !important;
+        }
+        .sidebar-header {
+            padding: 60px 20px 20px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            transition: padding 0.2s;
+        }
+        .sidebar.closed .sidebar-header {
+            padding: 50px 0 8px 0;
+        }
+        .sidebar.closed .sidebar-header h1,
+        .sidebar.closed .sidebar-header p {
+            display: none !important;
         }
     </style>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -387,36 +446,37 @@
     });
     </script>
     <script>
+    // Sidebar toggle: open = penuh, closed = ikon saja
     const sidebar = document.getElementById('sidebar');
     const toggleBtn = document.getElementById('sidebarToggleBtn');
+    // Default sidebar terbuka
+    sidebar.classList.add('open');
+    sidebar.classList.remove('closed');
     function toggleSidebar() {
-        sidebar.classList.toggle('open');
+        if (sidebar.classList.contains('open')) {
+            sidebar.classList.remove('open');
+            sidebar.classList.add('closed');
+        } else {
+            sidebar.classList.remove('closed');
+            sidebar.classList.add('open');
+        }
         // Atur main-content margin
         const mainContent = document.querySelector('.main-content');
-        if (!sidebar.classList.contains('open')) {
-            mainContent.style.marginLeft = '0';
-        } else {
+        if (sidebar.classList.contains('open')) {
             mainContent.style.marginLeft = '260px';
+        } else {
+            mainContent.style.marginLeft = '64px';
         }
     }
     function closeSidebarOnMobile() {
         sidebar.classList.remove('open');
+        sidebar.classList.add('closed');
         const mainContent = document.querySelector('.main-content');
-        mainContent.style.marginLeft = '0';
+        mainContent.style.marginLeft = '64px';
     }
     toggleBtn.addEventListener('click', function() {
         toggleSidebar();
     });
-    // Optional: close sidebar when clicking outside (mobile)
-    document.addEventListener('click', function(e) {
-        if(sidebar.classList.contains('open')) {
-            if(!sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
-                sidebar.classList.remove('open');
-                const mainContent = document.querySelector('.main-content');
-                mainContent.style.marginLeft = '0';
-            }
-        }
-    });
-</script>
+    </script>
 </body>
 </html>

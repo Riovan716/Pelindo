@@ -12,6 +12,99 @@
         margin: 0 auto;
         padding: 20px;
     }
+    .berita-table-wrapper {
+        background: #fff;
+        border-radius: 20px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        overflow: hidden;
+        margin-top: 24px;
+    }
+    .berita-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        background: #fff;
+    }
+    .berita-table th {
+        background: #0070c9;
+        color: #fff;
+        font-weight: 700;
+        padding: 18px 20px;
+        border: none;
+        font-size: 16px;
+        text-align: left;
+    }
+    .berita-table th:first-child {
+        border-top-left-radius: 18px;
+    }
+    .berita-table th:last-child {
+        border-top-right-radius: 18px;
+    }
+    .berita-table td {
+        padding: 18px 20px;
+        border-bottom: 1px solid #e0e0e0;
+        font-size: 15px;
+        color: #222;
+        vertical-align: middle;
+        background: #fff;
+    }
+    .berita-table tr:last-child td {
+        border-bottom: none;
+    }
+    .berita-table tr:hover {
+        background-color: #f8f9fa;
+    }
+    .berita-table img {
+        max-width: 70px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+        display: block;
+        margin: 0 auto;
+    }
+    .btn-edit {
+        background: #ffc107;
+        color: #000;
+        margin-right: 8px;
+        padding: 8px 18px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: 600;
+        border: none;
+        transition: all 0.2s;
+        box-shadow: 0 2px 8px rgba(255,193,7,0.08);
+    }
+    .btn-edit:hover {
+        background: #ffb300;
+        color: #000;
+        text-decoration: none;
+    }
+    .btn-delete {
+        background: #dc3545;
+        color: #fff;
+        padding: 8px 18px;
+        border: none;
+        border-radius: 8px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        box-shadow: 0 2px 8px rgba(220,53,69,0.08);
+    }
+    .btn-delete:hover {
+        background: #b71c1c;
+    }
+    .alert {
+        padding: 16px 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        font-weight: 600;
+    }
+    .alert-success {
+        background: #d4edda;
+        color: #155724;
+        border-left: 4px solid #28a745;
+    }
     .header-section {
         display: flex;
         justify-content: space-between;
@@ -54,81 +147,6 @@
     .btn-tambah i {
         font-size: 18px;
     }
-    .alert {
-        padding: 16px 20px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-        font-weight: 600;
-    }
-    .alert-success {
-        background: #d4edda;
-        color: #155724;
-        border-left: 4px solid #28a745;
-    }
-    .berita-table {
-        width: 100%;
-        border-collapse: collapse;
-        background: #fff;
-        border-radius: 16px;
-        overflow: hidden;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    }
-    .berita-table th {
-        background: #0070c9;
-        color: #fff;
-        font-weight: 700;
-        padding: 16px 20px;
-        border: none;
-        font-size: 15px;
-    }
-    .berita-table td {
-        padding: 16px 20px;
-        border-bottom: 1px solid #e0e0e0;
-        font-size: 15px;
-        color: #222;
-        vertical-align: middle;
-    }
-    .berita-table tr:last-child td {
-        border-bottom: none;
-    }
-    .berita-table tr:hover {
-        background-color: #f8f9fa;
-    }
-    .berita-table img {
-        max-width: 80px;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .btn-edit {
-        background: #ffc107;
-        color: #000;
-        margin-right: 8px;
-        padding: 8px 16px;
-        border-radius: 6px;
-        text-decoration: none;
-        font-size: 14px;
-        font-weight: 600;
-        transition: all 0.2s;
-    }
-    .btn-edit:hover {
-        background: #ffb300;
-        color: #000;
-        text-decoration: none;
-    }
-    .btn-delete {
-        background: #dc3545;
-        color: #fff;
-        padding: 8px 16px;
-        border: none;
-        border-radius: 6px;
-        font-size: 14px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.2s;
-    }
-    .btn-delete:hover {
-        background: #b71c1c;
-    }
     .empty-state {
         text-align: center;
         padding: 60px 20px;
@@ -140,6 +158,28 @@
         color: #666;
         font-size: 16px;
         margin: 0;
+    }
+    .aksi-group {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+    @media (max-width: 900px) {
+        .container {
+            padding: 8px;
+        }
+        .header-section {
+            flex-direction: column;
+            gap: 16px;
+            padding: 18px 10px;
+        }
+        .berita-table th, .berita-table td {
+            padding: 10px 6px;
+            font-size: 13px;
+        }
+        .berita-table img {
+            max-width: 48px;
+        }
     }
 </style>
 
@@ -159,12 +199,13 @@
     @endif
 
     @if($beritas->count())
+    <div class="berita-table-wrapper">
         <table class="berita-table">
             <thead>
                 <tr>
                     <th>Judul</th>
                     <th>Isi</th>
-                    <th>Gambar</th>
+                    <th>File</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -181,17 +222,20 @@
                             @endif
                         </td>
                         <td>
-                            <a href="{{ route('admin.berita.edit', $berita->id) }}" class="btn-edit">Edit</a>
-                            <form action="{{ route('admin.berita.destroy', $berita->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="button" class="btn-delete">Hapus</button>
-                            </form>
+                            <div class="aksi-group">
+                                <a href="{{ route('admin.berita.edit', $berita->id) }}" class="btn-edit">Edit</a>
+                                <form action="{{ route('admin.berita.destroy', $berita->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="button" class="btn-delete">Hapus</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
+    </div>
     @else
         <div class="empty-state">
             <p>Belum ada berita yang tersedia.</p>

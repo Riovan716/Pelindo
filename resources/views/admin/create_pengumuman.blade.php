@@ -63,6 +63,10 @@
     textarea {
         resize: vertical;
         min-height: 120px;
+        font-family: 'Poppins', 'Segoe UI', 'Roboto', Arial, sans-serif;
+        font-size: 15px;
+        line-height: 1.7;
+        padding: 14px 18px;
     }
     .file-input-wrapper {
         position: relative;
@@ -197,6 +201,7 @@
             <div class="form-group">
                 <label for="isi">Isi Pengumuman *</label>
                 <textarea name="isi" id="isi" placeholder="Tulis isi pengumuman di sini..." required>{{ old('isi') }}</textarea>
+                <small style="color: #888; margin-top: 4px; display: block; font-size: 13px;">Gunakan Enter untuk membuat paragraf baru.</small>
             </div>
             <div class="form-group">
                 <label for="file">Upload File</label>

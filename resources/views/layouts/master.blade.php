@@ -8,6 +8,21 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <style>
+        html {
+            overflow-x: hidden;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* Internet Explorer 10+ */
+        }
+        html::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+        * {
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* Internet Explorer 10+ */
+        }
+        *::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -18,6 +33,28 @@
             min-height: 100vh;
             /* Batik Pelindo background */
             position: relative;
+            max-width: 100%;
+            overflow-x: hidden;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* Internet Explorer 10+ */
+        }
+        body::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+        /* Additional scrollbar hiding for all elements */
+        ::-webkit-scrollbar {
+            width: 0 !important;
+            height: 0 !important;
+            display: none !important;
+        }
+        ::-webkit-scrollbar-track {
+            display: none !important;
+        }
+        ::-webkit-scrollbar-thumb {
+            display: none !important;
+        }
+        ::-webkit-scrollbar-button {
+            display: none !important;
         }
         body::before {
             content: '';
@@ -34,6 +71,8 @@
         .header, main, .footer, .branding, nav, .header-top, .header-bottom {
             position: relative;
             z-index: 1;
+            max-width: 100%;
+            overflow-x: hidden;
         }
         .header {
             background: #fff;
@@ -42,12 +81,17 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.03);
             padding: 0;
             border-bottom: 1.5px solid #e0e0e0;
+            width: 100%;
+            max-width: 100%;
         }
         .header-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 18px 48px 10px 48px;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
         }
         .branding {
             display: flex;
@@ -101,6 +145,9 @@
             align-items: center;
             padding: 0 48px 0 48px;
             background: #fff;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
         }
         nav {
             display: flex;
@@ -131,9 +178,18 @@
         }
         main {
             width: 100%;
+            max-width: 100%;
             padding: 40px 60px;
             background: transparent; 
             box-shadow: none;
+            box-sizing: border-box;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+            overflow-x: hidden;
         }
         h1 {
             text-align: center;
@@ -175,6 +231,13 @@
                 flex-direction: row;
                 align-items: flex-start;
                 position: relative;
+                padding: 18px 24px 10px 24px;
+            }
+            main {
+                padding: 40px 24px;
+            }
+            .container {
+                padding: 0 15px;
             }
             .nav-toggle-btn {
                 display: block;

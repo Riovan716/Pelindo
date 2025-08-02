@@ -63,6 +63,10 @@
     textarea {
         resize: vertical;
         min-height: 120px;
+        font-family: 'Poppins', 'Segoe UI', 'Roboto', Arial, sans-serif;
+        font-size: 15px;
+        line-height: 1.7;
+        padding: 14px 18px;
     }
     .file-input-wrapper {
         position: relative;
@@ -77,6 +81,17 @@
     }
     .file-input-wrapper input[type="file"]:hover {
         background: #e8f4ff;
+    }
+    .alert {
+        padding: 16px 20px;
+        border-radius: 8px;
+        margin-bottom: 24px;
+        font-weight: 600;
+    }
+    .alert-success {
+        background: #d4edda;
+        color: #155724;
+        border-left: 4px solid #28a745;
     }
     .alert-danger {
         background: #fff5f5;
@@ -154,12 +169,17 @@
     <a href="{{ route('admin.berita.index') }}" class="back-link">
         ← Kembali ke Daftar Berita
     </a>
-    
     <div class="form-card">
         <div class="form-header">
-            <h1>Tambah Berita Baru</h1>
-            <p>Isi form di bawah untuk menambahkan berita baru</p>
+            <h1>Tambah Berita</h1>
+            <p>Isi data berita di bawah ini</p>
         </div>
+
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -174,17 +194,15 @@
 
         <form action="{{ route('admin.berita.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            
             <div class="form-group">
                 <label for="judul">Judul Berita *</label>
                 <input type="text" name="judul" id="judul" placeholder="Masukkan judul berita..." required value="{{ old('judul') }}">
             </div>
-
             <div class="form-group">
                 <label for="isi">Isi Berita *</label>
                 <textarea name="isi" id="isi" placeholder="Tulis isi berita di sini..." required>{{ old('isi') }}</textarea>
+                <small style="color: #888; margin-top: 4px; display: block; font-size: 13px;">Gunakan Enter untuk membuat paragraf baru.</small>
             </div>
-
             <div class="form-group">
                 <label for="gambar">Upload Gambar</label>
                 <div class="file-input-wrapper">
@@ -194,7 +212,6 @@
                     Format yang didukung: JPG, PNG, GIF. Maksimal 2MB.
                 </small>
             </div>
-
             <div class="btn-container">
                 <button type="submit" class="btn btn-primary">
                     <i>✓</i>

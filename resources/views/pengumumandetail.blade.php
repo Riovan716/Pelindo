@@ -8,7 +8,7 @@
 <style>
     body {
         font-family: 'Poppins', 'Segoe UI', 'Roboto', Arial, sans-serif;
-        background: linear-gradient(to bottom, #82d7e9, #d0f0f8);
+        background: linear-gradient(to bottom,rgb(46, 148, 168), #d0f0f8);
     }
     .detail-container {
         width: 100vw;
@@ -40,7 +40,7 @@
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
         min-height: 80vh;
-        max-height: 100vh;
+        max-height: 150vh;
         overflow: hidden;
     }
     .detail-image img {

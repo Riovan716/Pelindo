@@ -42,7 +42,7 @@
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
         min-height: 80vh;
-        max-height: 100vh;
+        max-height: 150vh;
         overflow: hidden;
         position: relative;
     }

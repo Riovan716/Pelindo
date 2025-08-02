@@ -1,19 +1,102 @@
 @extends('layouts.master_admin')
 @section('title', 'Detail Data SIO')
 @section('content')
-    <h1>Detail Data SIO</h1>
-    <div style="background:#f9f9f9; border-radius:10px; box-shadow:0 2px 8px #0001; padding:24px; max-width:600px; margin:30px auto;">
-        <b>Judul:</b> {{ $datasio->judul }}<br>
-        <b>Deskripsi:</b> <div style="margin-bottom:8px;">{{ $datasio->deskripsi }}</div>
-        <b>Tanggal Mulai:</b> {{ $datasio->tanggal_mulai }}<br>
-        <b>Tanggal Berakhir:</b> {{ $datasio->tanggal_berakhir }}<br>
-        <b>File:</b>
-        @if($datasio->file)
-            <a href="{{ asset('storage/'.$datasio->file) }}" target="_blank">Download File</a>
-        @else
-            -
-        @endif
-        <br><br>
-        <a href="{{ route('admin.datasio.index') }}" style="background:#588996; color:#fff; padding:8px 18px; border-radius:6px; text-decoration:none;">Kembali</a>
+    <div class="diklat-detail-container">
+        <div class="diklat-detail-header">
+            <h1><i class="fas fa-info-circle"></i> Detail Data SIO</h1>
+        </div>
+        <div class="diklat-detail-card">
+            <div class="detail-row"><span class="detail-label">Judul:</span> <span class="detail-value">{{ $datasio->judul }}</span></div>
+            <div class="detail-row"><span class="detail-label">Deskripsi:</span> <span class="detail-value">{{ $datasio->deskripsi }}</span></div>
+            <div class="detail-row"><span class="detail-label">Tanggal Mulai:</span> <span class="detail-value">{{ $datasio->tanggal_mulai }}</span></div>
+            <div class="detail-row"><span class="detail-label">Tanggal Berakhir:</span> <span class="detail-value">{{ $datasio->tanggal_berakhir }}</span></div>
+            <div class="detail-row"><span class="detail-label">File:</span> <span class="detail-value">
+                @if($datasio->file)
+                    <a href="{{ asset('storage/'.$datasio->file) }}" target="_blank" class="file-link"><i class="fas fa-paperclip"></i> Download File</a>
+                @else
+                    <span class="file-empty">-</span>
+                @endif
+            </span></div>
+            <div class="detail-actions">
+                <a href="{{ route('admin.datasio.index') }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Kembali</a>
+            </div>
+        </div>
     </div>
+    <style>
+        .diklat-detail-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .diklat-detail-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .diklat-detail-header h1 {
+            color: #0070c9;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .diklat-detail-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 32px 28px 24px 28px;
+            border: 1px solid #f0f0f0;
+        }
+        .detail-row {
+            margin-bottom: 18px;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+        .detail-label {
+            font-weight: 600;
+            color: #0070c9;
+            min-width: 120px;
+            display: inline-block;
+        }
+        .detail-value {
+            color: #333;
+            flex: 1;
+        }
+        .file-link {
+            color: #0070c9;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .file-link:hover {
+            color: #005fa3;
+            text-decoration: underline;
+        }
+        .file-empty {
+            color: #bbb;
+            font-size: 15px;
+        }
+        .detail-actions {
+            margin-top: 24px;
+            text-align: right;
+        }
+        .btn-secondary {
+            background: #e8f4f8;
+            color: #0070c9;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 22px;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        .btn-secondary:hover {
+            background: #d0e7f5;
+            color: #005fa3;
+        }
+    </style>
 @endsection 
