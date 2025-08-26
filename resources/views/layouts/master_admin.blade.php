@@ -101,6 +101,8 @@
                 <a href="{{ route('admin.lowongan') }}" class="nav-link {{ request()->routeIs('admin.lowongan') ? 'active' : '' }}" onclick="closeSidebarOnMobile()"><i class="fas fa-briefcase"></i> <span class="menu-text">Tambah Lowongan</span></a>
                 <a href="{{ route('admin.rekomendasi') }}" class="nav-link {{ request()->routeIs('admin.rekomendasi') ? 'active' : '' }}" onclick="closeSidebarOnMobile()"><i class="fas fa-user-graduate"></i> <span class="menu-text">Rekomendasi Magang</span></a>
                 <a href="{{ route('admin.pelamar-diterima.index') }}" class="nav-link {{ request()->routeIs('admin.pelamar-diterima.*') ? 'active' : '' }}" onclick="closeSidebarOnMobile()"><i class="fas fa-user-check"></i> <span class="menu-text">Pelamar Diterima</span></a>
+                <a href="{{ route('admin.skripsi.index') }}" class="nav-link {{ request()->routeIs('admin.skripsi.*') ? 'active' : '' }}" onclick="closeSidebarOnMobile()"><i class="fas fa-book"></i> <span class="menu-text">E-Library Skripsi</span></a>
+                <a href="{{ route('admin.laporan_kp.index') }}" class="nav-link {{ request()->routeIs('admin.laporan_kp.*') ? 'active' : '' }}" onclick="closeSidebarOnMobile()"><i class="fas fa-file-alt"></i> <span class="menu-text">E-Library KP/PKL</span></a>
                 <a href="{{ route('admin.tentang') }}" class="nav-link {{ request()->routeIs('admin.tentang') ? 'active' : '' }}" onclick="closeSidebarOnMobile()"><i class="fas fa-info-circle"></i> <span class="menu-text">Tambah Tentang</span></a>
                 <a href="{{ route('actionlogout') }}" class="nav-link" id="logout-link" onclick="closeSidebarOnMobile()"><i class="fas fa-sign-out-alt"></i> <span class="menu-text">Logout</span></a>
             </nav>

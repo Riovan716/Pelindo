@@ -106,4 +106,15 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/pelamar-diterima', [\App\Http\Controllers\Admin\PelamarDiterimaController::class, 'index'])->name('admin.pelamar-diterima.index');
     Route::get('/pelamar-diterima/{id}', [\App\Http\Controllers\Admin\PelamarDiterimaController::class, 'show'])->name('admin.pelamar-diterima.show');
     Route::put('/pelamar-diterima/{id}/status', [\App\Http\Controllers\Admin\PelamarDiterimaController::class, 'updateStatus'])->name('admin.pelamar-diterima.update-status');
+    
+    // E-Library routes
+    Route::resource('skripsi', \App\Http\Controllers\Admin\SkripsiController::class, [
+        'as' => 'admin'
+    ]);
+    Route::get('/skripsi/{skripsi}/download', [\App\Http\Controllers\Admin\SkripsiController::class, 'download'])->name('admin.skripsi.download');
+    
+    Route::resource('laporan_kp', \App\Http\Controllers\Admin\LaporanKpController::class, [
+        'as' => 'admin'
+    ])->parameters(['laporan_kp' => 'laporanKp']);
+    Route::get('/laporan_kp/{laporanKp}/download', [\App\Http\Controllers\Admin\LaporanKpController::class, 'download'])->name('admin.laporan_kp.download');
 });
