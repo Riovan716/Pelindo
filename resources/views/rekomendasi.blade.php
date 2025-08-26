@@ -27,6 +27,7 @@
         padding: 0 2vw;
     }
     .lowongan-row {
+      
         display: flex;
         align-items: flex-start;
         background: #fff;

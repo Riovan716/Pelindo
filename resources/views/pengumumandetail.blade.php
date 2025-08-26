@@ -8,7 +8,7 @@
 <style>
     body {
         font-family: 'Poppins', 'Segoe UI', 'Roboto', Arial, sans-serif;
-        background: linear-gradient(to bottom,rgb(46, 148, 168), #d0f0f8);
+        background: linear-gradient(to bottom,rgba(140, 207, 220, 1), #d0f0f8);
     }
     .detail-container {
         width: 100vw;
